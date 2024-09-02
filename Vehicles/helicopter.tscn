@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bttggi2dbwlxx"]
+
+[ext_resource type="Texture2D" uid="uid://duha16x033j8n" path="res://icon.svg" id="1_kmd5f"]
+[ext_resource type="Script" path="res://Vehicles/helicopter.gd" id="1_t1tmf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n53tm"]
+size = Vector2(128, 128)
+
+[node name="Helicopter" type="RigidBody2D"]
+mass = 900.0
+linear_damp = 1.0
+angular_damp = 1.0
+script = ExtResource("1_t1tmf")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_kmd5f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_n53tm")
