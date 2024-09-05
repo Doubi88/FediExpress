@@ -18,8 +18,8 @@ func create_world_data() -> Array[FediServerData]:
 	keys.shuffle()
 	
 	var servers: Array[FediServerData] = []
-	var max = randi_range(3, min(max_servers, keys.size()))
-	for i in range(0, max):
+	var server_count = randi_range(3, min(max_servers, keys.size()))
+	for i in range(0, server_count):
 		var server_name = keys[i]
 		var server = FediServerData.new()
 		server.server_name = server_name
@@ -56,7 +56,7 @@ func parse_accounts(account_names: Array[String]) -> Dictionary:
 		accounts[server_name].append(user_name)
 	return accounts
 
-func generate_cloud_world(parent: Node, servers: Array[FediServerData], preloaded_server_scene: PackedScene, preloaded_cloud_icon: Texture) -> Array[FediServer]:
+func generate_cloud_world(parent: Node, servers: Array[FediServerData], preloaded_server_scene: PackedScene) -> Array[FediServer]:
 	var positions: Dictionary = {}
 	var result: Array[FediServer] = []
 	for fedi_server_data in servers:
@@ -67,7 +67,7 @@ func generate_cloud_world(parent: Node, servers: Array[FediServerData], preloade
 		result.append(server)
 		
 		var pos: Vector2i
-		var size = Vector2(randi_range(1, 5), 1)#randi_range(1, 3))
+		var size = Vector2(randi_range(1, 5), randi_range(1, 3))
 		while (pos == null) || (!can_place_server_at(pos, size, positions)):
 			pos = Vector2i(randi_range(0, 25), randi_range(0, 25))
 			

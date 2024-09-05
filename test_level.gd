@@ -6,7 +6,6 @@ extends Node2D
 var vehicle: Helicopter
 
 @onready var server_scene = preload("res://World/fedi_server.tscn")
-@onready var cloud_texture = preload("res://icon.svg")
 @onready var heli_scene = preload("res://Vehicles/helicopter.tscn")
 
 var servers: Array[FediServer] = []
@@ -19,7 +18,7 @@ func _draw():
 func _ready():
 	var buil = WorldBuilder.new()
 	var server_datas = buil.create_world_data()
-	servers = buil.generate_cloud_world(self, server_datas, server_scene, cloud_texture)
+	servers = buil.generate_cloud_world(self, server_datas, server_scene)
 	
 	vehicle = heli_scene.instantiate()
 	var spawn_server = servers.pick_random()

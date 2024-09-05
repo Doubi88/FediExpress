@@ -22,6 +22,8 @@ class_name FediServer
 	get:
 		return size_in_grid
 
+@export var balls_per_grid_cell = 4
+
 @onready var name_label = $NameLabel
 
 var pos_changed = true
@@ -37,19 +39,25 @@ func _process(delta: float):
 		size_changed = false
 
 func redraw_icons():
-	for icon in icon_parent.get_children():
+	var icons = icon_parent.get_children()
+	for icon in icons:
 		icon_parent.remove_child(icon)
 		icon.queue_free()
 	
 	var real_size = Vector2(size_in_grid) * GridData.cell_size
-	(collision_shape.shape as RectangleShape2D).size = real_size
+	var new_shape = RectangleShape2D.new()
+	new_shape.size = real_size
+	collision_shape.shape = new_shape
+	
+	for grid_y in range(0, size_in_grid.y):
+		for grid_x in range(0, size_in_grid.x):
+			for i in range(0, balls_per_grid_cell):
+				var x = randi_range((grid_x - 0.5) * GridData.cell_size.x, (grid_x + 0.5) * GridData.cell_size.x)
+				var y = randi_range((grid_y - 0.5) * GridData.cell_size.y, (grid_y + 0.5) * GridData.cell_size.y)
+				var pos = Vector2(x, y)
 
-	var start_pos = Vector2i(-floor(size_in_grid.x / 2.0), -floor(size_in_grid.y / 2.0))
-	for x in range(start_pos.x, size_in_grid.x + start_pos.x):
-		for y in range (start_pos.y, size_in_grid.y + start_pos.y):
-			var pos = Vector2i(x, y)
-			var icon = Sprite2D.new()
-			icon_parent.add_child(icon)
-			icon.texture = cloud_part_icon
-			icon.centered = false
-			icon.position = Vector2(pos) * GridData.cell_size
+				var icon = Sprite2D.new()
+				icon_parent.add_child(icon)
+				icon.texture = cloud_part_icon
+				icon.centered = false
+				icon.position = (pos - (Vector2(size_in_grid.x * GridData.cell_size.x, size_in_grid.y * GridData.cell_size.y) / 2.0)) + (Vector2(position_in_grid) * GridData.cell_size)
