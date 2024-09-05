@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+class_name Helicopter
+
 var throttle = 1 # -1 - 1
 var rotation_rate = 0 # -1 - 1
 
@@ -15,7 +17,7 @@ func _physics_process(delta):
 	current_up_force = up_force_length * up_vector
 	
 	apply_central_force(current_up_force)
-	apply_torque(rotation_rate * 1000000)
+	apply_torque(rotation_rate * 5000000)
 
 func _integrate_forces(state: PhysicsDirectBodyState2D):
 	gravity = state.total_gravity
