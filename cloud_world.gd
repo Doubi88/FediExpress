@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var test_text = $TargetCamera/CanvasGroup/TestText
+@onready var test_text = $CanvasGroup/TestText
 @onready var cam = $TargetCamera
 
 var vehicle: Helicopter

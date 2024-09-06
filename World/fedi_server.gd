@@ -2,7 +2,7 @@ extends StaticBody2D
 
 class_name FediServer
 
-@onready var cloud_part_icon = preload("res://World/cloud_circle.png")
+@onready var cloud_part_icon = preload("res://World/cloud_circle_64.png")
 
 @onready var collision_shape = $CollisionShape2D
 @onready var icon_parent = $IconParent
@@ -24,7 +24,7 @@ class_name FediServer
 
 @export var balls_per_grid_cell = 4
 
-@onready var name_label = $NameLabel
+@onready var name_label = $NameSign/NameLabel
 
 var pos_changed = true
 var size_changed = true
