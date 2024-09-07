@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sl7dfr4a52fs"
-path="res://.godot/imported/wood.png-d78b3498d8108bee149082effd2bf473.ctex"
+uid="uid://dc6cgs28ci155"
+path="res://.godot/imported/cloud_circle_64.png-7055914f95e65d9c46db5628a0b79dd0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://World/wood.png"
-dest_files=["res://.godot/imported/wood.png-d78b3498d8108bee149082effd2bf473.ctex"]
+source_file="res://CloudWorld/cloud_circle_64.png"
+dest_files=["res://.godot/imported/cloud_circle_64.png-7055914f95e65d9c46db5628a0b79dd0.ctex"]
 
 [params]
 

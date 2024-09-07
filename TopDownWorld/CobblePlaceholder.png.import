@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dc6cgs28ci155"
-path="res://.godot/imported/cloud_circle_64.png-13e18505aa27d5d73b4c087959db1b18.ctex"
+uid="uid://cfwr2t2uronys"
+path="res://.godot/imported/CobblePlaceholder.png-54ee111d988e454e476d85ef94c47a41.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://World/cloud_circle_64.png"
-dest_files=["res://.godot/imported/cloud_circle_64.png-13e18505aa27d5d73b4c087959db1b18.ctex"]
+source_file="res://TopDownWorld/CobblePlaceholder.png"
+dest_files=["res://.godot/imported/CobblePlaceholder.png-54ee111d988e454e476d85ef94c47a41.ctex"]
 
 [params]
 

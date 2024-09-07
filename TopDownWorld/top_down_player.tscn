@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://1bxnxjuqhb07"]
+
+[ext_resource type="Texture2D" uid="uid://vukogqs230vn" path="res://HumanPlaceholder.png" id="1_67msp"]
+[ext_resource type="Script" path="res://TopDownWorld/top_down_player.gd" id="1_rc4vk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_urcc8"]
+radius = 8.0
+height = 32.0
+
+[node name="TopDownPlayer" type="CharacterBody2D"]
+script = ExtResource("1_rc4vk")
+
+[node name="HumanPlaceholder" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_67msp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_urcc8")

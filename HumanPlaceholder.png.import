@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cuanj63trb0db"
-path="res://.godot/imported/cloud_circle.png-4922a3c87409fee3d1d54441cafd3d87.ctex"
+uid="uid://vukogqs230vn"
+path="res://.godot/imported/HumanPlaceholder.png-48215d29048cf88d5269d819c2920b01.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://World/cloud_circle.png"
-dest_files=["res://.godot/imported/cloud_circle.png-4922a3c87409fee3d1d54441cafd3d87.ctex"]
+source_file="res://HumanPlaceholder.png"
+dest_files=["res://.godot/imported/HumanPlaceholder.png-48215d29048cf88d5269d819c2920b01.ctex"]
 
 [params]
 

@@ -1,15 +1,15 @@
 [gd_scene load_steps=6 format=3 uid="uid://dioyqkbgskwl5"]
 
-[ext_resource type="Script" path="res://World/fedi_server.gd" id="1_0upif"]
-[ext_resource type="Theme" uid="uid://ochiaokyyqk4" path="res://theme.tres" id="2_wwjhh"]
-[ext_resource type="Script" path="res://World/NameLabel.gd" id="3_w5wxv"]
-[ext_resource type="Texture2D" uid="uid://sl7dfr4a52fs" path="res://World/wood.png" id="3_y7f3i"]
+[ext_resource type="Script" path="res://CloudWorld/fedi_server.gd" id="1_insyf"]
+[ext_resource type="Script" path="res://CloudWorld/NameLabel.gd" id="2_kh2e0"]
+[ext_resource type="Texture2D" uid="uid://sl7dfr4a52fs" path="res://CloudWorld/wood.png" id="3_8d7px"]
+[ext_resource type="Theme" uid="uid://ochiaokyyqk4" path="res://theme.tres" id="4_7bo8b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rvjq7"]
 size = Vector2(128, 128)
 
 [node name="FediServer" type="StaticBody2D"]
-script = ExtResource("1_0upif")
+script = ExtResource("1_insyf")
 
 [node name="IconParent" type="Node" parent="."]
 
@@ -17,14 +17,14 @@ script = ExtResource("1_0upif")
 shape = SubResource("RectangleShape2D_rvjq7")
 
 [node name="NameSign" type="Node" parent="."]
-script = ExtResource("3_w5wxv")
+script = ExtResource("2_kh2e0")
 
 [node name="TextureRect" type="TextureRect" parent="NameSign"]
 offset_left = -18.0
 offset_top = -24.0
 offset_right = 51.0
 offset_bottom = 40.0
-texture = ExtResource("3_y7f3i")
+texture = ExtResource("3_8d7px")
 stretch_mode = 1
 
 [node name="NameLabel" type="Label" parent="NameSign"]
@@ -32,5 +32,5 @@ offset_left = -18.0
 offset_top = -24.0
 offset_right = 32.0
 offset_bottom = -1.0
-theme = ExtResource("2_wwjhh")
+theme = ExtResource("4_7bo8b")
 text = "dfsfsdf"

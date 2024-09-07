@@ -1,5 +1,7 @@
 extends Camera2D
 
+class_name TargetCamera
+
 @export var target: Node2D
 
 func _process(delta):

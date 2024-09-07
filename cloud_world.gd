@@ -5,7 +5,7 @@ extends Node2D
 
 var vehicle: Helicopter
 
-@onready var server_scene = preload("res://World/fedi_server.tscn")
+@onready var server_scene = preload("res://CloudWorld/fedi_server.tscn")
 @onready var heli_scene = preload("res://Vehicles/helicopter.tscn")
 
 var servers: Array[FediServer] = []
