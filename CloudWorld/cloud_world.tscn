@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://brj830wsnhnq1"]
 
-[ext_resource type="Script" path="res://cloud_world.gd" id="1_ije8m"]
+[ext_resource type="Script" path="res://CloudWorld/cloud_world.gd" id="1_ije8m"]
 [ext_resource type="Script" path="res://TargetCamera.gd" id="4_o5g1a"]
 
 [node name="CloudWorld" type="Node2D"]
