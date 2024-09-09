@@ -8,7 +8,7 @@
 [node name="ServerWorld" type="Node2D"]
 script = ExtResource("1_t6ntf")
 
-[node name="TilesParent" type="TileMap" parent="."]
+[node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_gvcic")
 format = 2
 
@@ -19,4 +19,3 @@ target = NodePath("../Node/TopDownPlayer")
 [node name="Node" type="Node" parent="."]
 
 [node name="TopDownPlayer" parent="Node" instance=ExtResource("4_oxbcu")]
-position = Vector2(27, 16)
