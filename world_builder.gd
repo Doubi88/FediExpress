@@ -3,7 +3,7 @@ extends Resource
 class_name WorldBuilder
 
 @export var max_servers = 10
-@export var max_accounts_per_server = 5
+@export var max_accounts_per_server = 12
 
 func read_accounts_file() -> PackedStringArray:
 	var file = FileAccess.open("res://data/account_names.txt", FileAccess.READ)

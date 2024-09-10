@@ -30,7 +30,7 @@ var pos_changed = true
 var size_changed = true
 
 func _process(delta: float):
-	name_label.text = '@' + server_data.server_name + " pos: (" + String.num(position_in_grid.x) + ", " + String.num(position_in_grid.y) + ") size: (" + String.num(size_in_grid.x) + ", " + String.num(size_in_grid.y) + ")"
+	name_label.text = '@' + server_data.server_name + " accounts: " + String.num(server_data.accounts.size())
 	if pos_changed:
 		position = Vector2(position_in_grid) * GridData.cell_size + GridData.origin
 		pos_changed = false
@@ -60,4 +60,4 @@ func redraw_icons():
 				icon_parent.add_child(icon)
 				icon.texture = cloud_part_icon
 				icon.centered = false
-				icon.position = (pos - (Vector2(size_in_grid.x * GridData.cell_size.x, size_in_grid.y * GridData.cell_size.y) / 2.0)) + (Vector2(position_in_grid) * GridData.cell_size)
+				icon.position = (pos - (Vector2(size_in_grid.x * GridData.cell_size.x, size_in_grid.y * GridData.cell_size.y) / 2.0))

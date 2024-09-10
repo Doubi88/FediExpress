@@ -1,10 +1,11 @@
 extends Node2D
 
-var cobble_floor = preload("res://TopDownWorld/CobblePlaceholder.png")
-var house = preload("res://TopDownWorld/HousePlaceholder.png")
-
 const HELIPAD_ATLAS_X = 2
 const HELIPAD_ATLAS_Y = 0
+const GROUND_ATLAS_X = 0
+const GROUND_ATLAS_Y = 0
+const HOUSE_ATLAS_X = 0
+const HOUSE_ATLAS_Y = 2
 
 @onready var tilemap = $TileMap
 
@@ -34,9 +35,9 @@ func generate_tiles_square(top_left: Vector2i, atlas_top_left: Vector2i):
 			tilemap.set_cell(0, real, 0, atlas_coord)
 
 func generate_neighbourhood(helipad_top_left: Vector2i, accounts: Array[FediAccountData]):
-	var occupied = [0, 0, 0, 0]
+	var occupied: PackedInt32Array = [0, 0, 0, 0]
 	for account in accounts:
-		var direction = randi_range(0, 4)
+		var direction = randi_range(0, 3)
 		var top_left = Vector2i.ZERO
 		if direction == 0:
 			# Up
@@ -51,7 +52,7 @@ func generate_neighbourhood(helipad_top_left: Vector2i, accounts: Array[FediAcco
 			# Left
 			top_left = helipad_top_left + Vector2i(-2 - (occupied[direction] * 2), 0)
 
-		generate_tiles_square(top_left, Vector2i.ZERO)
+		generate_tiles_square(top_left, Vector2i(GROUND_ATLAS_X, GROUND_ATLAS_Y))
 		occupied[direction] += 1
 		
 
