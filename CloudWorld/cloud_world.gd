@@ -2,8 +2,8 @@ extends Node2D
 
 class_name CloudWorld
 
-@onready var test_text = $CanvasGroup/TestText
-@onready var cam = $TargetCamera
+@onready var test_text: Label = $CanvasGroup/TestText
+@onready var cam: Camera2D = $TargetCamera
 
 var vehicle: Helicopter
 
@@ -31,7 +31,7 @@ func _ready():
 	cam.target = vehicle
 	
 			
-func _process(delta):
+func _process(delta: float) -> void:
 	if vehicle != null and vehicle.current_up_force != null:
 		var rot = vehicle.rotation - (PI / 2)
 		var rotation_vector = Vector2.from_angle(rot)
