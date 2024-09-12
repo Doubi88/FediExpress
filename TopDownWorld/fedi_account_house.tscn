@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3y8xy1so42d5"]
+
+[ext_resource type="Script" path="res://TopDownWorld/fedi_account_house.gd" id="1_4j83y"]
+[ext_resource type="Texture2D" uid="uid://sac6suiik411" path="res://TopDownWorld/house.png" id="2_lqthj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crweh"]
+size = Vector2(64, 64)
+
+[node name="FediAccountHouse" type="StaticBody2D"]
+script = ExtResource("1_4j83y")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_lqthj")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-1, -23, 7, -30, 31, -5, 23, 5, 24, 11, 16, 20, -20, 20, -20, -5, -31, 1, -32, -1)
+
+[node name="DeliveryArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeliveryArea"]
+shape = SubResource("RectangleShape2D_crweh")
+
+[connection signal="body_entered" from="DeliveryArea" to="." method="_on_delivery_area_body_entered"]

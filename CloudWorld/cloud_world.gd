@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name CloudWorld
+
 @onready var test_text = $CanvasGroup/TestText
 @onready var cam = $TargetCamera
 

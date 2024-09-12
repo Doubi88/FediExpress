@@ -35,10 +35,12 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("enter_leave vehicle"):
 		var landed_server = is_landed()
 		if landed_server != null:
-			var server_scene = preload("res://TopDownWorld/server_world.tscn").instantiate()
+			var server_scene: ServerWorld = preload("res://TopDownWorld/server_world.tscn").instantiate()
 			server_scene.server_data = landed_server.server_data
 			get_tree().root.add_child(server_scene)
-			get_node("/root/CloudWorld").queue_free()
+			var cloud_world = get_node("/root/CloudWorld")
+			get_tree().root.remove_child(cloud_world)
+			server_scene.cloud_world = cloud_world
 
 func _integrate_forces(state: PhysicsDirectBodyState2D):
 	gravity = state.total_gravity

@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name ServerWorld
+
 const HELIPAD_ATLAS_X = 2
 const HELIPAD_ATLAS_Y = 0
 const GROUND_ATLAS_X = 0
@@ -7,23 +9,46 @@ const GROUND_ATLAS_Y = 0
 const HOUSE_ATLAS_X = 0
 const HOUSE_ATLAS_Y = 2
 
+enum Direction {
+	UP, RIGHT, DOWN, LEFT
+}
+
 @onready var tilemap = $TileMap
+@onready var player = $TopDownPlayer
+@onready var area64Scene = preload("res://TopDownWorld/area_64x_64.tscn")
 
 @export var server_data: FediServerData
 
+var can_leave = false
+var rand: RandomNumberGenerator = RandomNumberGenerator.new()
 var created_view = false
 
-func _process(delta):
-	var direction = randi_range(0, 3)
+var cloud_world: CloudWorld
 
+func _process(delta):
 	if not created_view:
+		rand.seed = server_data.server_name.hash()
 		created_view = true
 		var current_pos = Vector2.ZERO
-
-		# Generate helipad
-		generate_tiles_square(current_pos, Vector2i(HELIPAD_ATLAS_X, HELIPAD_ATLAS_Y))
-		# Generate houses
-		generate_neighbourhood(current_pos, server_data.accounts)
+		
+		# Generate paths and houses
+		var helipad = generate_neighbourhood(current_pos, server_data.accounts)
+		
+		var touchHelipadScene: Area2D = area64Scene.instantiate()
+		touchHelipadScene.body_entered.connect(on_helipad_body_entered)
+		touchHelipadScene.body_exited.connect(on_helipad_body_exited)
+		self.add_child(touchHelipadScene)
+		touchHelipadScene.position = tilemap.map_to_local(helipad) + (tilemap.tile_set.tile_size / 2.0)
+		
+		player.position = tilemap.map_to_local(helipad)
+	else:
+		if can_leave:
+			if Input.is_action_just_pressed("enter_leave vehicle"):
+				if cloud_world == null:
+					var cloud_world_packed = preload("res://CloudWorld/cloud_world.gd")
+					cloud_world = cloud_world_packed.instantiate()
+				get_tree().root.add_child(cloud_world)
+				queue_free()
 		
 func generate_tiles_square(top_left: Vector2i, atlas_top_left: Vector2i):
 	for x in range(2):
@@ -34,25 +59,44 @@ func generate_tiles_square(top_left: Vector2i, atlas_top_left: Vector2i):
 
 			tilemap.set_cell(0, real, 0, atlas_coord)
 
-func generate_neighbourhood(helipad_top_left: Vector2i, accounts: Array[FediAccountData]):
-	var occupied: PackedInt32Array = [0, 0, 0, 0]
+func generate_neighbourhood(helipad_top_left: Vector2i, accounts: Array[FediAccountData]) -> Vector2i:
+	var grid_diameter: int = max(floor(accounts.size() / 2.0), 5)
+	
+	var house_positions: Dictionary = {}
+	
+	var helipad_pos: Vector2i = Vector2i(floor(grid_diameter / 2.0), floor(grid_diameter / 2.0))
+	
+	var astar: AStarGrid2D = AStarGrid2DRandomWeight.new(rand)
+	astar.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
+	astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+	astar.region = Rect2i(0, 0, grid_diameter, grid_diameter)
+	astar.update()
+	
 	for account in accounts:
-		var direction = randi_range(0, 3)
-		var top_left = Vector2i.ZERO
-		if direction == 0:
-			# Up
-			top_left = helipad_top_left + Vector2i(0, -2 - (occupied[direction] * 2))
-		elif direction == 1:
-			# Right
-			top_left = helipad_top_left + Vector2i(2 + (occupied[direction] * 2), 0)
-		elif direction == 2:
-			# Down
-			top_left = helipad_top_left + Vector2i(0, 2 + (occupied[direction] * 2))
-		elif direction == 3:
-			# Left
-			top_left = helipad_top_left + Vector2i(-2 - (occupied[direction] * 2), 0)
+		var pos: Vector2i = Vector2i(rand.randi_range(0, grid_diameter - 1), rand.randi_range(0, grid_diameter - 1))
+		while pos == helipad_pos or house_positions.has(pos):
+			pos = Vector2i(rand.randi_range(0, grid_diameter), rand.randi_range(0, grid_diameter))
+		house_positions[pos] = account
+		astar.set_point_solid(pos, true)
+	astar.update()
+	
+	for pos: Vector2i in house_positions:
+		var path: PackedVector2Array = astar.get_point_path(helipad_pos, pos)
+		for p: Vector2 in path:
+			var pi: Vector2i = Vector2i(p)
+			if pi == helipad_pos:
+				generate_tiles_square(pi * 2, Vector2i(HELIPAD_ATLAS_X, HELIPAD_ATLAS_Y))
+			elif pi == pos:
+				generate_tiles_square(pi * 2, Vector2i(HOUSE_ATLAS_X, HOUSE_ATLAS_Y))
+			else:
+				generate_tiles_square(pi * 2, Vector2i(GROUND_ATLAS_X, GROUND_ATLAS_Y))
+	return helipad_pos * 2
 
-		generate_tiles_square(top_left, Vector2i(GROUND_ATLAS_X, GROUND_ATLAS_Y))
-		occupied[direction] += 1
-		
-
+func on_helipad_body_entered(body: Node2D) -> void:
+	print(body, "entered")
+	if body == player:
+		can_leave = true
+func on_helipad_body_exited(body: Node2D) -> void:
+	print(body, "exited")
+	if body == player:
+		can_leave = false
