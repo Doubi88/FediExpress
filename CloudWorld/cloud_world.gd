@@ -19,8 +19,8 @@ func _draw():
 		
 func _ready():
 	var buil = WorldBuilder.new()
-	var server_datas = buil.create_world_data()
-	servers = buil.generate_cloud_world(self, server_datas, server_scene)
+	GlobalServerData.server_data = buil.create_world_data()
+	servers = buil.generate_cloud_world(self, GlobalServerData.server_data, server_scene)
 	
 	vehicle = heli_scene.instantiate()
 	var spawn_server = servers.pick_random()
