@@ -20,4 +20,4 @@ func _process(delta: float) -> void:
 		
 		next_mission_time = randi_range(new_mission_interval_range[0], new_mission_interval_range[1])
 		elapsed_since_last_create_mission = 0
-		print("New mission:", mission.from.account_name + '@' + mission.from.fedi_server.server_name, " to ", mission.to.account_name + '@' +  mission.from.fedi_server.server_name)
+		print("New mission:", mission.from.account_name + '@' + mission.from.fedi_server.server_name, " to ", mission.to.account_name + '@' +  mission.to.fedi_server.server_name)

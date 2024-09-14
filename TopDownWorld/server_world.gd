@@ -16,6 +16,7 @@ enum Direction {
 @onready var tilemap = $TileMap
 @onready var player = $TopDownPlayer
 @onready var area64Scene = preload("res://TopDownWorld/area_64x_64.tscn")
+@onready var house_scene = preload("res://TopDownWorld/fedi_account_house.tscn")
 
 @export var server_data: FediServerData
 
@@ -81,13 +82,20 @@ func generate_neighbourhood(helipad_top_left: Vector2i, accounts: Array[FediAcco
 	astar.update()
 	
 	for pos: Vector2i in house_positions:
-		var path: PackedVector2Array = astar.get_point_path(helipad_pos, pos)
+		astar.set_point_solid(pos, false)
+		var path: PackedVector2Array = astar.get_point_path(helipad_pos, pos, true)
+		astar.set_point_solid(pos, true)
 		for p: Vector2 in path:
 			var pi: Vector2i = Vector2i(p)
 			if pi == helipad_pos:
 				generate_tiles_square(pi * 2, Vector2i(HELIPAD_ATLAS_X, HELIPAD_ATLAS_Y))
 			elif pi == pos:
-				generate_tiles_square(pi * 2, Vector2i(HOUSE_ATLAS_X, HOUSE_ATLAS_Y))
+				generate_tiles_square(pi * 2, Vector2i(GROUND_ATLAS_X, GROUND_ATLAS_Y))
+
+				var house: FediAccountHouse = house_scene.instantiate()
+				add_child(house)
+				house.account_data = house_positions[pos]
+				house.position = tilemap.map_to_local(pi * 2) + (Vector2(tilemap.tile_set.tile_size) / 2.0)
 			else:
 				generate_tiles_square(pi * 2, Vector2i(GROUND_ATLAS_X, GROUND_ATLAS_Y))
 	return helipad_pos * 2
