@@ -35,6 +35,5 @@ func _process(delta: float) -> void:
 	if vehicle != null and vehicle.current_up_force != null:
 		var rot = vehicle.rotation - (PI / 2)
 		var rotation_vector = Vector2.from_angle(rot)
-		test_text.text = String.num(vehicle.current_up_force.x, 3) + ', ' + String.num(vehicle.current_up_force.y, 3) + "\n" + String.num(rotation / PI, 3) + " -> " + String.num(rotation_vector.x) + ", " + String.num(rotation_vector.y)
-		
 		queue_redraw()
+	test_text.text = "Points: " + String.num(GlobalServerData.points)
