@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="WorldBuilder" load_steps=3 format=3 uid="uid://d3ph0brmf81qt"]
+
+[ext_resource type="Script" path="res://world_builder.gd" id="1_iu75h"]
+[ext_resource type="PackedScene" uid="uid://dioyqkbgskwl5" path="res://CloudWorld/fedi_server.tscn" id="2_osy0f"]
+
+[resource]
+script = ExtResource("1_iu75h")
+min_servers = 3
+max_servers = 10
+max_accounts_per_server = 12
+server_scene = ExtResource("2_osy0f")
+min_cloud_size = Vector2i(2, 1)
+max_cloud_size = Vector2i(5, 3)
+world_size = Vector2i(25, 25)

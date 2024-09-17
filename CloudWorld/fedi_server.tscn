@@ -17,20 +17,18 @@ script = ExtResource("1_insyf")
 shape = SubResource("RectangleShape2D_rvjq7")
 
 [node name="NameSign" type="Node2D" parent="."]
+position = Vector2(-29, -13)
 script = ExtResource("2_kh2e0")
 
 [node name="TextureRect" type="TextureRect" parent="NameSign"]
-offset_left = -18.0
-offset_top = -24.0
-offset_right = 51.0
-offset_bottom = 40.0
+offset_right = 56.0
+offset_bottom = 26.0
 texture = ExtResource("3_8d7px")
+expand_mode = 1
 stretch_mode = 1
 
 [node name="NameLabel" type="Label" parent="NameSign"]
-offset_left = -18.0
-offset_top = -24.0
-offset_right = 32.0
-offset_bottom = -1.0
+offset_right = 50.0
+offset_bottom = 23.0
 theme = ExtResource("4_7bo8b")
 text = "dfsfsdf"

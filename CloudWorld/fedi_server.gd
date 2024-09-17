@@ -24,13 +24,15 @@ class_name FediServer
 
 @export var balls_per_grid_cell = 4
 
-@onready var name_label = $NameSign/NameLabel
+@onready var name_sign: Node2D = $NameSign
+@onready var name_label: Label = $NameSign/NameLabel
 
 var pos_changed = true
 var size_changed = true
 
 func _process(delta: float):
-	name_label.text = '@' + server_data.server_name + " accounts: " + String.num(server_data.accounts.size())
+	name_label.text = '@' + server_data.server_name
+	name_sign.position = -(name_label.size / 2.0)
 	if pos_changed:
 		position = Vector2(position_in_grid) * GridData.cell_size + GridData.origin
 		pos_changed = false
