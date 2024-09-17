@@ -4,31 +4,38 @@ class_name CloudWorld
 
 @onready var test_text: Label = $CanvasGroup/TestText
 @onready var cam: Camera2D = $TargetCamera
+@onready var navigation = $Navigation
 
 var vehicle: Helicopter
 
 @onready var server_scene = preload("res://CloudWorld/fedi_server.tscn")
 @onready var heli_scene = preload("res://Vehicles/helicopter.tscn")
 
-var servers: Array[FediServer] = []
+@export var world_size: Vector2i = Vector2i(25, 25)
+@export var world_builder: WorldBuilder
 
-func _draw():
-	if vehicle != null:
-		for server in servers:
-			draw_line(server.global_position, vehicle.global_position, Color.RED, 10, true)
+@export var background_border: Vector2i = Vector2i(30, 30)
+
+var servers: Array[FediServer] = []
 		
 func _ready():
-	var buil = WorldBuilder.new()
-	GlobalServerData.server_data = buil.create_world_data()
-	servers = buil.generate_cloud_world(self, GlobalServerData.server_data, server_scene)
+	var bg: TextureRect = $Background
+	bg.size = (Vector2(world_size + background_border)) * GridData.cell_size
+	bg.position = -(Vector2(background_border) * GridData.cell_size)
+
+	GlobalServerData.server_data = world_builder.create_world_data()
+	servers = world_builder.generate_cloud_world(self, GlobalServerData.server_data)
 	
 	vehicle = heli_scene.instantiate()
-	var spawn_server = servers.pick_random()
+	var spawn_server: FediServer = servers.pick_random()
 	
-	var pos = spawn_server.global_position - Vector2(0, GridData.cell_size.y)
+	var pos: Vector2 = Vector2(spawn_server.position_in_grid - Vector2i(0, spawn_server.size_in_grid.y)) * GridData.cell_size
 	add_child(vehicle)
 	vehicle.global_position = pos
 	cam.target = vehicle
+
+	navigation.start = vehicle
+	navigation.goals.append_array(servers)
 	
 			
 func _process(delta: float) -> void:
