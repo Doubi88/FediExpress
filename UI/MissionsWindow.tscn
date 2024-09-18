@@ -4,7 +4,7 @@
 
 [node name="MissionsWindow" type="Window"]
 initial_position = 2
-size = Vector2i(512, 256)
+size = Vector2i(512, 512)
 script = ExtResource("1_dehfn")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -37,7 +37,7 @@ size_flags_vertical = 3
 
 [node name="DeliverButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Accept"
+text = "Deliver"
 
 [connection signal="pressed" from="VBoxContainer/AcceptButton" to="." method="_on_accept_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/DeliverButton" to="." method="_on_deliver_button_pressed"]

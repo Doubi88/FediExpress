@@ -29,7 +29,7 @@ func _ready():
 	vehicle = heli_scene.instantiate()
 	var spawn_server: FediServer = servers.pick_random()
 	
-	var pos: Vector2 = Vector2(spawn_server.position_in_grid - Vector2i(0, spawn_server.size_in_grid.y)) * GridData.cell_size
+	var pos: Vector2 = (Vector2(spawn_server.position_in_grid) + Vector2(0, -spawn_server.size_in_grid.y / 2.0)) * GridData.cell_size
 	add_child(vehicle)
 	vehicle.global_position = pos
 	cam.target = vehicle
