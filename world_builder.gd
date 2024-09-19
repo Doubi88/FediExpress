@@ -38,6 +38,8 @@ func create_accounts(server: FediServerData, account_names: Array) -> Array[Fedi
 	var names = account_names.duplicate()
 	names.shuffle()
 	var max_accounts = randi_range(1, min(max_accounts_per_server, names.size()))
+	if names.size() > 1:
+		print(server.server_name, ': ', names.size(), ' ', max_accounts, ' ')
 	for i in range(0, max_accounts):
 		var account_name = names[i]
 		var account = FediAccountData.new()

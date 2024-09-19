@@ -6,8 +6,16 @@ class_name FediServer
 
 @onready var collision_shape = $CollisionShape2D
 @onready var icon_parent = $IconParent
+@onready var attention_sign = $NameSign/Attention
 
-@export var server_data: FediServerData
+@export var server_data: FediServerData:
+	set(value):
+		server_data = value
+		if server_data != null and is_node_ready():
+			missions_changed()
+	get:
+		return server_data
+
 @export var position_in_grid: Vector2i:
 	set(value):
 		position_in_grid = value
@@ -30,6 +38,11 @@ class_name FediServer
 var pos_changed = true
 var size_changed = true
 
+func _ready() -> void:
+	GlobalServerData.missions_updated.connect(missions_changed)
+	if server_data != null:
+		missions_changed()
+
 func _process(delta: float):
 	name_label.text = '@' + server_data.server_name
 	name_sign.position = -(name_label.size / 2.0)
@@ -40,6 +53,12 @@ func _process(delta: float):
 		redraw_icons()
 		size_changed = false
 
+func missions_changed() -> void:
+	if GlobalServerData.has_mission_from_server(server_data.server_name):
+		attention_sign.visible = true
+	else:
+		attention_sign.visible = false
+		
 func redraw_icons():
 	var icons = icon_parent.get_children()
 	for icon in icons:

@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c3kot7wicmyv4"
+
+[deps]
+
+files=["res://data/fediverse-fans-full-2024-09-18.Show boosts.translation", "res://data/fediverse-fans-full-2024-09-18.Notify on new posts.translation", "res://data/fediverse-fans-full-2024-09-18.Languages.translation"]
+
+source_file="res://data/fediverse-fans-full-2024-09-18.csv"
+dest_files=["res://data/fediverse-fans-full-2024-09-18.Show boosts.translation", "res://data/fediverse-fans-full-2024-09-18.Notify on new posts.translation", "res://data/fediverse-fans-full-2024-09-18.Languages.translation"]
+
+[params]
+
+compress=true
+delimiter=0

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3y8xy1so42d5"]
+[gd_scene load_steps=6 format=3 uid="uid://d3y8xy1so42d5"]
 
 [ext_resource type="Script" path="res://TopDownWorld/fedi_account_house.gd" id="1_4j83y"]
 [ext_resource type="Texture2D" uid="uid://sac6suiik411" path="res://TopDownWorld/house.png" id="2_lqthj"]
 [ext_resource type="Theme" uid="uid://ochiaokyyqk4" path="res://theme.tres" id="3_ny2iq"]
+[ext_resource type="Texture2D" uid="uid://bgns5t44q6a8u" path="res://attention.png" id="4_cg12e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_crweh"]
 size = Vector2(64, 64)
@@ -22,10 +23,16 @@ polygon = PackedVector2Array(-19, -10, -2, -10, 31, -5, 23, 5, 24, 11, 16, 20, -
 shape = SubResource("RectangleShape2D_crweh")
 
 [node name="NameLabel" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = -22.0
+offset_top = -18.0
+offset_right = 18.0
 theme = ExtResource("3_ny2iq")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="Attention" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(1, -44)
+texture = ExtResource("4_cg12e")
 
 [connection signal="body_entered" from="DeliveryArea" to="." method="_on_delivery_area_body_entered"]
 [connection signal="body_exited" from="DeliveryArea" to="." method="_on_delivery_area_body_exited"]

@@ -43,3 +43,21 @@ func deliver_mission(mission: Mission, account: FediAccountData) -> bool:
 		result = true
 		missions_updated.emit()
 	return result
+
+func has_mission_from_account(account: FediAccountData) -> bool:
+	var result := false
+	var index := 0
+	while index < available_missions.size() and (!result):
+		if available_missions[index].from.account_name == account.account_name and available_missions[index].from.fedi_server.server_name == account.fedi_server.server_name:
+			result = true
+		index += 1
+	return result
+
+func has_mission_from_server(server_name: String) -> bool:
+	var result := false
+	var index := 0
+	while index < available_missions.size() and (!result):
+		if available_missions[index].from.fedi_server.server_name == server_name:
+			result = true
+		index += 1
+	return result

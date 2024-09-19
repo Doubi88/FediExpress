@@ -2,7 +2,7 @@ extends Node2D
 
 class_name CloudWorld
 
-@onready var test_text: Label = $CanvasGroup/TestText
+@onready var points_text: Label = $CanvasGroup/PointsText
 @onready var cam: Camera2D = $TargetCamera
 @onready var navigation = $Navigation
 
@@ -19,9 +19,9 @@ var vehicle: Helicopter
 var servers: Array[FediServer] = []
 		
 func _ready():
-	var bg: TextureRect = $Background
-	bg.size = (Vector2(world_size + background_border)) * GridData.cell_size
-	bg.position = -(Vector2(background_border) * GridData.cell_size)
+	#var bg: TextureRect = $BackgroundLayer/Background
+	#bg.size = (Vector2(world_size + background_border)) * GridData.cell_size
+	#bg.position = -(Vector2(background_border) * GridData.cell_size)
 
 	GlobalServerData.server_data = world_builder.create_world_data()
 	servers = world_builder.generate_cloud_world(self, GlobalServerData.server_data)
@@ -36,11 +36,11 @@ func _ready():
 
 	navigation.start = vehicle
 	navigation.goals.append_array(servers)
-	
+		
 			
 func _process(delta: float) -> void:
 	if vehicle != null and vehicle.current_up_force != null:
 		var rot = vehicle.rotation - (PI / 2)
 		var rotation_vector = Vector2.from_angle(rot)
 		queue_redraw()
-	test_text.text = "Points: " + String.num(GlobalServerData.points)
+	points_text.text = "Points: " + String.num(GlobalServerData.points)

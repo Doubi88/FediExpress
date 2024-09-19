@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dioyqkbgskwl5"]
+[gd_scene load_steps=7 format=3 uid="uid://dioyqkbgskwl5"]
 
 [ext_resource type="Script" path="res://CloudWorld/fedi_server.gd" id="1_insyf"]
 [ext_resource type="Script" path="res://CloudWorld/NameLabel.gd" id="2_kh2e0"]
 [ext_resource type="Texture2D" uid="uid://sl7dfr4a52fs" path="res://CloudWorld/wood.png" id="3_8d7px"]
 [ext_resource type="Theme" uid="uid://ochiaokyyqk4" path="res://theme.tres" id="4_7bo8b"]
+[ext_resource type="Texture2D" uid="uid://bgns5t44q6a8u" path="res://attention.png" id="5_5n8lh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rvjq7"]
 size = Vector2(128, 128)
@@ -32,3 +33,8 @@ offset_right = 50.0
 offset_bottom = 23.0
 theme = ExtResource("4_7bo8b")
 text = "dfsfsdf"
+
+[node name="Attention" type="Sprite2D" parent="NameSign"]
+visible = false
+position = Vector2(31.75, 44)
+texture = ExtResource("5_5n8lh")
