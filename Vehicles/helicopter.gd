@@ -10,26 +10,20 @@ var current_up_force: Vector2 = Vector2.ZERO
 var current_rotation_force: float = 0
 
 @onready var sprite = $Sprite
+@onready var motor_player = $MotorEffectPlayer
+@onready var motor_start_player = $MotorStartPlayer
+@onready var motor_stop_player = $MotorStopPlayer
 
 var gravity = Vector2.ZERO
 var direction = -1
 var do_reset = false
 
+var landed_on_server: FediServer
+
 func _physics_process(delta: float) -> void:
 
-	var landed_server = is_landed()
-	if landed_server != null:
-		if Input.is_action_just_pressed("enter_leave vehicle"):
-			var server_scene: ServerWorld = preload("res://TopDownWorld/server_world.tscn").instantiate()
-			server_scene.server_data = landed_server.server_data
-			get_tree().root.add_child(server_scene)
-			var cloud_world = get_node("/root/CloudWorld")
-			get_tree().root.remove_child(cloud_world)
-			server_scene.cloud_world = cloud_world
-		elif Input.is_action_just_pressed("reset vehicle"):
-			do_reset = true
-			apply_central_force(Vector2.ZERO) # Wake the rigid body up, so _integrate_forces is called
-	else:
+	landed_on_server = is_landed()
+	if landed_on_server == null:
 		var up_vector = Vector2.from_angle(rotation - (PI / 2.0))
 		var up_force_length = throttle * mass * (-gravity.y * up_vector).y
 		current_up_force = up_force_length * up_vector
@@ -58,13 +52,6 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		do_reset = false
 	
 func _process(delta: float) -> void:
-	if (Input.is_action_just_pressed("toggle engine")):
-		engine_on = !engine_on
-		if engine_on:
-			sprite.frame = 1
-		else:
-			sprite.frame = 0
-	
 	if (engine_on):
 		throttle = Input.get_axis("throttle down", "throttle up") + 1
 		rotation_rate = Input.get_axis("yaw left", "yaw right")
@@ -86,3 +73,27 @@ func is_landed() -> FediServer:
 			return null
 	else:
 		return null
+
+func _unhandled_input(event: InputEvent) -> void:
+	if (event.is_action_pressed("toggle engine")):
+		engine_on = !engine_on
+		if engine_on:
+			sprite.frame = 1
+			motor_start_player.playing = true
+			motor_start_player.finished.connect(func(): motor_player.playing = true)
+		else:
+			sprite.frame = 0
+			motor_player.playing = false
+			motor_stop_player.playing = true
+
+	if landed_on_server != null:
+		if event.is_action_pressed("enter_leave vehicle"):
+			var server_scene: ServerWorld = preload("res://TopDownWorld/server_world.tscn").instantiate()
+			server_scene.server_data = landed_on_server.server_data
+			get_tree().root.add_child(server_scene)
+			var cloud_world = get_node("/root/CloudWorld")
+			get_tree().root.remove_child(cloud_world)
+			server_scene.cloud_world = cloud_world
+		elif event.is_action_pressed("reset vehicle"):
+			do_reset = true
+			apply_central_force(Vector2.ZERO) # Wake the rigid body up, so _integrate_forces is called

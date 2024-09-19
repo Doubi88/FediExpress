@@ -42,14 +42,6 @@ func _process(delta):
 		touchHelipadScene.position = tilemap.map_to_local(helipad) + (tilemap.tile_set.tile_size / 2.0)
 		
 		player.position = tilemap.map_to_local(helipad)
-	else:
-		if can_leave:
-			if Input.is_action_just_pressed("enter_leave vehicle"):
-				if cloud_world == null:
-					var cloud_world_packed = preload("res://CloudWorld/cloud_world.gd")
-					cloud_world = cloud_world_packed.instantiate()
-				get_tree().root.add_child(cloud_world)
-				queue_free()
 		
 func generate_tiles_square(top_left: Vector2i, atlas_top_left: Vector2i):
 	for x in range(2):
@@ -108,3 +100,12 @@ func on_helipad_body_exited(body: Node2D) -> void:
 	print(body, "exited")
 	if body == player:
 		can_leave = false
+
+func _unhandled_input(event: InputEvent) -> void:
+	if can_leave:
+		if event.is_action_pressed("enter_leave vehicle"):
+			if cloud_world == null:
+				var cloud_world_packed = preload("res://CloudWorld/cloud_world.gd")
+				cloud_world = cloud_world_packed.instantiate()
+			get_tree().root.add_child(cloud_world)
+			queue_free()

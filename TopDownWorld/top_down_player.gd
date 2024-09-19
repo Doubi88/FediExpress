@@ -30,13 +30,14 @@ func _process(delta: float) -> void:
 		rotation_degrees += 3
 	if Input.is_action_pressed("walk left"):
 		rotation_degrees -= 3
-		
-	if looking_at_house != null and Input.is_action_just_pressed("toggle engine"):
-		open_mission_window()
 
 	velocity = lerp(velocity, new_velocity * Vector2.from_angle(rotation), 0.8)
 	move_and_slide()
-	
+
+func _unhandled_input(event: InputEvent) -> void:
+	if looking_at_house != null and event.is_action_pressed("toggle engine"):
+		open_mission_window()
+
 func open_mission_window() -> void:
 	if current_open_mission_window == null:
 		current_open_mission_window = mission_window_packed.instantiate()
@@ -48,3 +49,4 @@ func close_mission_window():
 	remove_child(current_open_mission_window)
 	current_open_mission_window.queue_free()
 	current_open_mission_window = null
+
