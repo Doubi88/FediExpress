@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bttggi2dbwlxx"]
+[gd_scene load_steps=11 format=3 uid="uid://bttggi2dbwlxx"]
 
 [ext_resource type="Script" path="res://Vehicles/helicopter.gd" id="1_t1tmf"]
 [ext_resource type="Texture2D" uid="uid://cha80qh2onm62" path="res://Vehicles/helicopter.png" id="2_clf0t"]
 [ext_resource type="AudioStream" uid="uid://v0wmm0g0rayy" path="res://Audio/heli.ogg" id="3_61qwd"]
 [ext_resource type="AudioStream" uid="uid://dqgmyfih74itc" path="res://Audio/heli_start.ogg" id="4_sh3lu"]
 [ext_resource type="AudioStream" uid="uid://bjps8spj33sdq" path="res://Audio/heli_stop.ogg" id="5_00ftf"]
+[ext_resource type="Texture2D" uid="uid://dphmwyq7h3gii" path="res://logo.png" id="6_f2img"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sodod"]
 atlas = ExtResource("2_clf0t")
@@ -28,7 +29,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1hd0"]
+atlas = ExtResource("6_f2img")
+region = Rect2(300, 0, 150, 64)
+
 [node name="Helicopter" type="RigidBody2D"]
+texture_filter = 1
 mass = 900.0
 linear_damp = 1.0
 angular_damp = 1.0
@@ -38,6 +44,7 @@ script = ExtResource("1_t1tmf")
 sprite_frames = SubResource("SpriteFrames_g8a5n")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(13, 18, -26, 18, -28, 14, -24, 11, -26, 9, -26, 1, -25, -2, -31, -4, -32, -12, -26, -16, -12, -21, 12, -19, 20, -13, 23, -9, 32, -8, 33, -3, 29, 5, 32, 11, 25, 11, 20, 4, 4, 3, -1, 10, 13, 16)
 
 [node name="MotorEffectPlayer" type="AudioStreamPlayer2D" parent="."]
@@ -50,3 +57,13 @@ stream = ExtResource("4_sh3lu")
 
 [node name="MotorStopPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_00ftf")
+
+[node name="FrontLogo" type="Sprite2D" parent="."]
+position = Vector2(-19, 5)
+scale = Vector2(0.06, 0.06)
+texture = SubResource("AtlasTexture_r1hd0")
+
+[node name="TailLogo" type="Sprite2D" parent="."]
+position = Vector2(10, 4.76837e-07)
+scale = Vector2(0.06, 0.06)
+texture = SubResource("AtlasTexture_r1hd0")

@@ -49,4 +49,3 @@ func close_mission_window():
 	remove_child(current_open_mission_window)
 	current_open_mission_window.queue_free()
 	current_open_mission_window = null
-

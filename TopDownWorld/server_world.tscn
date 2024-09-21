@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://caxci8gjhqq5h" path="res://TopDownWorld/background.png" id="5_yeabc"]
 
 [node name="ServerWorld" type="Node2D"]
+texture_filter = 1
 script = ExtResource("1_t6ntf")
 
 [node name="TileMap" type="TileMap" parent="."]

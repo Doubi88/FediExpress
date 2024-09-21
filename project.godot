@@ -1,24 +1,21 @@
-; Engine configuration file.
-; It's best edited using the editor UI and not directly,
-; since the parameters that go here are not all obvious.
-;
-; Format:
-;   [section] ; section goes between []
-;   param=value ; assign values to parameters
-
 config_version=5
 
 [application]
 
-config/name="FediMailman"
-run/main_scene="res://CloudWorld/cloud_world.tscn"
+config/name="FediExpress"
+config/version="0.1"
+run/main_scene="res://splash.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Logo_single.png"
 
 [autoload]
 
 GridData="*res://grid_data.gd"
 GlobalServerData="*res://global_server_data.gd"
+
+[gui]
+
+theme/custom="res://theme.tres"
 
 [input]
 

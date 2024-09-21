@@ -44,3 +44,7 @@ func _process(delta: float) -> void:
 		var rotation_vector = Vector2.from_angle(rot)
 		queue_redraw()
 	points_text.text = "Points: " + String.num(GlobalServerData.points)
+
+func _show_tutorial():
+	var tutorial_window: DialogueWindow = preload("res://UI/dialogue.tscn").instantiate()
+	

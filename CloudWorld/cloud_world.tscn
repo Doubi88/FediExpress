@@ -8,6 +8,7 @@
 [ext_resource type="Theme" uid="uid://ochiaokyyqk4" path="res://theme.tres" id="5_bjd4r"]
 
 [node name="CloudWorld" type="Node2D"]
+texture_filter = 1
 script = ExtResource("1_ije8m")
 world_builder = ExtResource("2_qw18r")
 
