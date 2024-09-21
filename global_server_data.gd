@@ -20,7 +20,9 @@ func _process(delta: float) -> void:
 		if elapsed_since_last_create_mission >= next_mission_time:
 			var mission = Mission.new()
 			mission.from = server_data.pick_random().accounts.pick_random()
-			mission.to = server_data.pick_random().accounts.pick_random()
+			while mission.to == null or mission.to == mission.from:
+				mission.to = server_data.pick_random().accounts.pick_random()
+				
 			available_missions.append(mission)
 			
 			next_mission_time = randi_range(new_mission_interval_range[0], new_mission_interval_range[1])

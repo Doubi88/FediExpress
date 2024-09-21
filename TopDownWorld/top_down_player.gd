@@ -5,6 +5,7 @@ class_name TopDownPlayer
 @export var speed = 100
 
 @onready var mission_window_packed = preload("res://UI/MissionsWindow.tscn")
+@onready var animation = $AnimatedSprite
 
 var looking_at_house: FediAccountHouse
 var current_open_mission_window: MissionWindow
@@ -32,6 +33,11 @@ func _process(delta: float) -> void:
 		rotation_degrees -= 3
 
 	velocity = lerp(velocity, new_velocity * Vector2.from_angle(rotation), 0.8)
+	if velocity.length_squared() > 0:
+		animation.play()
+	else:
+		animation.stop()
+	
 	move_and_slide()
 
 func _unhandled_input(event: InputEvent) -> void:

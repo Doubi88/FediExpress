@@ -6,8 +6,8 @@
 
 [node name="Window" type="Window"]
 title = "Test"
-initial_position = 1
-size = Vector2i(512, 512)
+position = Vector2i(320, 512)
+size = Vector2i(512, 128)
 theme = ExtResource("1_rpv0m")
 script = ExtResource("2_xrlae")
 

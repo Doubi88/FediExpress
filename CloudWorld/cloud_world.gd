@@ -36,6 +36,7 @@ func _ready():
 
 	navigation.start = vehicle
 	navigation.goals.append_array(servers)
+	_show_tutorial()
 		
 			
 func _process(delta: float) -> void:
@@ -47,4 +48,19 @@ func _process(delta: float) -> void:
 
 func _show_tutorial():
 	var tutorial_window: DialogueWindow = preload("res://UI/dialogue.tscn").instantiate()
+	add_child(tutorial_window)
+	tutorial_window.label.text = "Greetings! Welcome to your new job in the fediverse! " + \
+								  "If you didn't know already: Your job is to deliver " + \
+								  "posts around the servers and accounts. To start the engine " + \
+								  "of your helicopter just press E. You can then control it " + \
+								  "with W, A, S and D. Look for the red exclamation marks. They " + \
+								  "tell you, where a post is ready to be delivered. As soon as you " + \
+								  "land, stop the engine, press Enter to leave your helicopter, " + \
+								  "and walk to the account. Press E in front of the account " + \
+								  "to view the list of posts and take some of them. When you're ready, " + \
+								  "return to your helicopter and press Enter again. That's everything " + \
+								  "you need to know. Good luck!\n" + \
+								  "Oh, and if you get stuck somewhere, just land on a cloud, stop your engine and press R."
+	tutorial_window.title = "Chief Godot"
+	tutorial_window.close_requested.connect(func(): tutorial_window.hide())
 	

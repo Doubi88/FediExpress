@@ -36,3 +36,6 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 [node name="Navigation" type="Node2D" parent="."]
 script = ExtResource("4_ar3cw")
 color = Color(0.167429, 0.457093, 0.308468, 1)
+width = 5
+distance = 25
+length = 25

@@ -10,9 +10,9 @@
 texture_filter = 1
 script = ExtResource("1_t6ntf")
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+use_parent_material = true
 tile_set = ExtResource("2_gvcic")
-format = 2
 
 [node name="TargetCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 zoom = Vector2(2, 2)
