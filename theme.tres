@@ -5,4 +5,4 @@ font_names = PackedStringArray("DejaVu Sans", "Sans-Serif")
 
 [resource]
 default_font = SubResource("SystemFont_kypwn")
-default_font_size = 12
+default_font_size = 21

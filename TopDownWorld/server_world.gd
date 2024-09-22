@@ -59,7 +59,7 @@ func generate_tiles_square(top_left: Vector2i, atlas_top_left: Vector2i) -> void
 				tilemap.set_cell(real, 0, atlas_coord)
 
 func generate_neighbourhood(accounts: Array[FediAccountData]) -> Vector2i:
-	var grid_diameter: int = max(floor(accounts.size() / 2.0), 5)
+	var grid_diameter: int = max(floor(accounts.size() / 2.0), 9)
 	
 	var house_positions: Dictionary = {}
 	

@@ -10,7 +10,9 @@ var points: int = 0
 var elapsed_since_last_create_mission: float = 0
 var next_mission_time: int = 0
 
-signal missions_updated();
+signal new_mission(mission: Mission)
+signal mission_accepted(mission: Mission);
+signal mission_delivered(mission: Mission);
 
 func _process(delta: float) -> void:
 	if server_data.size() > 0:
@@ -27,15 +29,14 @@ func _process(delta: float) -> void:
 			
 			next_mission_time = randi_range(new_mission_interval_range[0], new_mission_interval_range[1])
 			elapsed_since_last_create_mission = 0
-			print("New mission:", mission.from.account_name + '@' + mission.from.fedi_server.server_name, " to ", mission.to.account_name + '@' +  mission.to.fedi_server.server_name)
-			missions_updated.emit()
+			new_mission.emit(mission)
 		
 func accept_mission(mission: Mission) -> void:
 	var index = available_missions.find(mission)
 	if index >= 0:
 		var use = available_missions.pop_at(index)
 		accepted_missions.append(use)
-		missions_updated.emit()
+		mission_accepted.emit(use)
 
 func deliver_mission(mission: Mission, account: FediAccountData) -> bool:
 	var index = accepted_missions.find(mission)
@@ -44,7 +45,7 @@ func deliver_mission(mission: Mission, account: FediAccountData) -> bool:
 		accepted_missions.remove_at(index)
 		points += 1
 		result = true
-		missions_updated.emit()
+		mission_delivered.emit(mission)
 	return result
 
 func has_mission_from_account(account: FediAccountData) -> bool:

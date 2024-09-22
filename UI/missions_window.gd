@@ -15,17 +15,16 @@ class_name MissionWindow
 
 func _ready() -> void:
 	update_caption()
-	update_missions()
-	GlobalServerData.missions_updated.connect(update_missions)
-
-func _exit_tree() -> void:
-	GlobalServerData.missions_updated.disconnect(update_missions)
+	update_missions(null)
+	GlobalServerData.new_mission.connect(update_missions)
+	GlobalServerData.mission_accepted.connect(update_missions)
+	GlobalServerData.mission_delivered.connect(update_missions)
 
 func update_caption() -> void:
 	if account != null and captionLabel != null:
 		captionLabel.text = 'Missions from ' + account.account_name + '@' + account.fedi_server.server_name
 	
-func update_missions():
+func update_missions(updated_mission: Mission):
 	var index: int = 0
 	for mission in GlobalServerData.available_missions:
 		if mission.from == account:

@@ -34,5 +34,8 @@ visible = false
 position = Vector2(1, -44)
 texture = ExtResource("4_cg12e")
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
+
 [connection signal="body_entered" from="DeliveryArea" to="." method="_on_delivery_area_body_entered"]
 [connection signal="body_exited" from="DeliveryArea" to="." method="_on_delivery_area_body_exited"]

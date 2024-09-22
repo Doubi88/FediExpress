@@ -12,7 +12,7 @@ class_name FediServer
 	set(value):
 		server_data = value
 		if server_data != null and is_node_ready():
-			missions_changed()
+			missions_changed(null)
 	get:
 		return server_data
 
@@ -39,9 +39,11 @@ var pos_changed = true
 var size_changed = true
 
 func _ready() -> void:
-	GlobalServerData.missions_updated.connect(missions_changed)
+	GlobalServerData.new_mission.connect(missions_changed)
+	GlobalServerData.mission_accepted.connect(missions_changed)
+	GlobalServerData.mission_delivered.connect(missions_changed)
 	if server_data != null:
-		missions_changed()
+		missions_changed(null)
 
 func _process(delta: float):
 	name_label.text = '@' + server_data.server_name
@@ -53,7 +55,7 @@ func _process(delta: float):
 		redraw_icons()
 		size_changed = false
 
-func missions_changed() -> void:
+func missions_changed(mission: Mission) -> void:
 	if GlobalServerData.has_mission_from_server(server_data.server_name):
 		attention_sign.visible = true
 	else:

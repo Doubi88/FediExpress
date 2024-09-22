@@ -1,0 +1,5 @@
+# Credits
+## Music
+- [Coniferous forest](https://pixabay.com/music/acoustic-group-coniferous-forest-142569/) by <a href="https://pixabay.com/users/orangery-34071953/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=142569">orangery</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=142569">Pixabay</a>
+- [My Life (Main)](https://pixabay.com/music/acoustic-group-my-life-main-6670/) Music by <a href="https://pixabay.com/users/good_b_music-22836301/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=6670">Zakhar Valaha</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=6670">Pixabay</a>
+- [Just Relax](https://pixabay.com/music/beautiful-plays-just-relax-11157/) Music by <a href="https://pixabay.com/users/lesfm-22579021/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=11157">Oleksii Kaplunskyi</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=11157">Pixabay</a>

@@ -22,22 +22,32 @@ func _physics_process(delta: float) -> void:
 		looking_at_house = null
 	
 func _process(delta: float) -> void:
-	var new_velocity = 0;
+	var new_velocity := Vector2.ZERO;
 	if Input.is_action_pressed("walk forward"):
-		new_velocity += speed
+		new_velocity.y -= speed
 	if Input.is_action_pressed("walk backward"):
-		new_velocity -= speed
+		new_velocity.y += speed
 	if Input.is_action_pressed("walk right"):
-		rotation_degrees += 3
+		new_velocity.x += speed
 	if Input.is_action_pressed("walk left"):
-		rotation_degrees -= 3
+		new_velocity.x -= speed
 
-	velocity = lerp(velocity, new_velocity * Vector2.from_angle(rotation), 0.8)
+	velocity = lerp(velocity, new_velocity, 0.8)
 	if velocity.length_squared() > 0:
 		animation.play()
 	else:
 		animation.stop()
 	
+	var angle: float = rad_to_deg(new_velocity.angle())
+	if angle >= 180:
+		angle = 360 - angle
+	if angle < 45:
+		animation.animation = "right"
+	elif angle < 135:
+		animation.animation = "up"
+	elif angle < 180:
+		animation.animation = "left"
+
 	move_and_slide()
 
 func _unhandled_input(event: InputEvent) -> void:

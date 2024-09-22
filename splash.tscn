@@ -1,8 +1,54 @@
-[gd_scene load_steps=4 format=3 uid="uid://yj2p0nl718sl"]
+[gd_scene load_steps=12 format=3 uid="uid://yj2p0nl718sl"]
 
 [ext_resource type="SpriteFrames" uid="uid://ctsupw0ofh6bc" path="res://logo_frames.tres" id="1_4ek7r"]
 [ext_resource type="Script" path="res://splash.gd" id="1_fq35p"]
 [ext_resource type="PackedScene" uid="uid://brj830wsnhnq1" path="res://CloudWorld/cloud_world.tscn" id="2_2l1ek"]
+[ext_resource type="Texture2D" uid="uid://depwc873tafb6" path="res://music_button.png" id="4_248wv"]
+[ext_resource type="Texture2D" uid="uid://cnojfodw82e24" path="res://sound_button.png" id="4_p8on0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5m8nu"]
+atlas = ExtResource("4_248wv")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45y7x"]
+atlas = ExtResource("4_248wv")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_usbfc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5m8nu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45y7x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kkjll"]
+atlas = ExtResource("4_p8on0")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1yaip"]
+atlas = ExtResource("4_p8on0")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mio3i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kkjll")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1yaip")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Splash" type="Node2D"]
 texture_filter = 1
@@ -13,3 +59,38 @@ next_scene = ExtResource("2_2l1ek")
 position = Vector2(574, 312)
 scale = Vector2(7.65625, 7.65625)
 sprite_frames = ExtResource("1_4ek7r")
+
+[node name="Buttons" type="Node2D" parent="."]
+visible = false
+
+[node name="StartButton" type="Button" parent="Buttons"]
+offset_left = 393.0
+offset_top = 257.0
+offset_right = 541.0
+offset_bottom = 305.0
+text = "Start Game"
+
+[node name="MuteMusicButton" type="Button" parent="Buttons"]
+offset_left = 397.0
+offset_top = 322.0
+offset_right = 459.0
+offset_bottom = 389.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Buttons/MuteMusicButton"]
+sprite_frames = SubResource("SpriteFrames_usbfc")
+centered = false
+
+[node name="MuteSFXButton" type="Button" parent="Buttons"]
+offset_left = 473.0
+offset_top = 323.0
+offset_right = 543.0
+offset_bottom = 391.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Buttons/MuteSFXButton"]
+position = Vector2(4, 2)
+sprite_frames = SubResource("SpriteFrames_mio3i")
+centered = false
+
+[connection signal="pressed" from="Buttons/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Buttons/MuteMusicButton" to="." method="_on_mute_music_button_pressed"]
+[connection signal="pressed" from="Buttons/MuteSFXButton" to="." method="_on_mute_sfx_button_pressed"]

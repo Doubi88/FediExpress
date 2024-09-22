@@ -19,10 +19,6 @@ var vehicle: Helicopter
 var servers: Array[FediServer] = []
 		
 func _ready():
-	#var bg: TextureRect = $BackgroundLayer/Background
-	#bg.size = (Vector2(world_size + background_border)) * GridData.cell_size
-	#bg.position = -(Vector2(background_border) * GridData.cell_size)
-
 	GlobalServerData.server_data = world_builder.create_world_data()
 	servers = world_builder.generate_cloud_world(self, GlobalServerData.server_data)
 	
@@ -54,7 +50,7 @@ func _show_tutorial():
 								  "posts around the servers and accounts. To start the engine " + \
 								  "of your helicopter just press E. You can then control it " + \
 								  "with W, A, S and D. Look for the red exclamation marks. They " + \
-								  "tell you, where a post is ready to be delivered. As soon as you " + \
+								  "tell you, where a post is ready to be taken. As soon as you " + \
 								  "land, stop the engine, press Enter to leave your helicopter, " + \
 								  "and walk to the account. Press E in front of the account " + \
 								  "to view the list of posts and take some of them. When you're ready, " + \

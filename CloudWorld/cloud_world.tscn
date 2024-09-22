@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://brj830wsnhnq1"]
 
 [ext_resource type="Script" path="res://CloudWorld/cloud_world.gd" id="1_ije8m"]
-[ext_resource type="Resource" uid="uid://d3ph0brmf81qt" path="res://CloudWorld/worl_builder.tres" id="2_qw18r"]
+[ext_resource type="Resource" uid="uid://d3ph0brmf81qt" path="res://CloudWorld/world_builder.tres" id="2_qw18r"]
 [ext_resource type="Texture2D" uid="uid://bbd8u52hfelmf" path="res://CloudWorld/sky.png" id="3_eplds"]
 [ext_resource type="Script" path="res://CloudWorld/navigation.gd" id="4_ar3cw"]
 [ext_resource type="Script" path="res://TargetCamera.gd" id="4_o5g1a"]
