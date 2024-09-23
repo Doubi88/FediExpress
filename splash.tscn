@@ -1,54 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://yj2p0nl718sl"]
+[gd_scene load_steps=9 format=3 uid="uid://yj2p0nl718sl"]
 
 [ext_resource type="SpriteFrames" uid="uid://ctsupw0ofh6bc" path="res://logo_frames.tres" id="1_4ek7r"]
 [ext_resource type="Script" path="res://splash.gd" id="1_fq35p"]
 [ext_resource type="PackedScene" uid="uid://brj830wsnhnq1" path="res://CloudWorld/cloud_world.tscn" id="2_2l1ek"]
-[ext_resource type="Texture2D" uid="uid://depwc873tafb6" path="res://music_button.png" id="4_248wv"]
-[ext_resource type="Texture2D" uid="uid://cnojfodw82e24" path="res://sound_button.png" id="4_p8on0"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5m8nu"]
-atlas = ExtResource("4_248wv")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_45y7x"]
-atlas = ExtResource("4_248wv")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_usbfc"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5m8nu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_45y7x")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kkjll"]
-atlas = ExtResource("4_p8on0")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1yaip"]
-atlas = ExtResource("4_p8on0")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_mio3i"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kkjll")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1yaip")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[ext_resource type="PackedScene" uid="uid://bcstaa556rfxy" path="res://UI/mute_audio_bus_button.tscn" id="4_aihiw"]
+[ext_resource type="Texture2D" uid="uid://rg522iyu0ss1" path="res://UI/music_button_on.tres" id="5_fgypk"]
+[ext_resource type="Texture2D" uid="uid://be8hf2ouy4jdi" path="res://UI/music_button_off.tres" id="6_dpaym"]
+[ext_resource type="Texture2D" uid="uid://nmjakurs8s1s" path="res://UI/sfx_button_on.tres" id="7_fp8fp"]
+[ext_resource type="Texture2D" uid="uid://bny0rnm6n46gx" path="res://UI/sfx_button_off.tres" id="8_lcec4"]
 
 [node name="Splash" type="Node2D"]
 texture_filter = 1
@@ -70,27 +29,23 @@ offset_right = 541.0
 offset_bottom = 305.0
 text = "Start Game"
 
-[node name="MuteMusicButton" type="Button" parent="Buttons"]
+[node name="MuteMusicButton" parent="Buttons" instance=ExtResource("4_aihiw")]
 offset_left = 397.0
 offset_top = 322.0
 offset_right = 459.0
 offset_bottom = 389.0
+texture_normal = ExtResource("5_fgypk")
+audio_stream_name = "Music"
+texture_not_muted = ExtResource("5_fgypk")
+texture_muted = ExtResource("6_dpaym")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Buttons/MuteMusicButton"]
-sprite_frames = SubResource("SpriteFrames_usbfc")
-centered = false
-
-[node name="MuteSFXButton" type="Button" parent="Buttons"]
-offset_left = 473.0
-offset_top = 323.0
-offset_right = 543.0
-offset_bottom = 391.0
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Buttons/MuteSFXButton"]
-position = Vector2(4, 2)
-sprite_frames = SubResource("SpriteFrames_mio3i")
-centered = false
+[node name="MuteAudioBusButton" parent="Buttons" instance=ExtResource("4_aihiw")]
+offset_left = 477.0
+offset_top = 321.0
+offset_right = 539.0
+offset_bottom = 388.0
+audio_stream_name = "SFX"
+texture_not_muted = ExtResource("7_fp8fp")
+texture_muted = ExtResource("8_lcec4")
 
 [connection signal="pressed" from="Buttons/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="Buttons/MuteMusicButton" to="." method="_on_mute_music_button_pressed"]
-[connection signal="pressed" from="Buttons/MuteSFXButton" to="." method="_on_mute_sfx_button_pressed"]

@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://dpkef3iavhts6"]
+
+[ext_resource type="PackedScene" uid="uid://bcstaa556rfxy" path="res://UI/mute_audio_bus_button.tscn" id="1_3kp6n"]
+[ext_resource type="Script" path="res://main_menu.gd" id="1_jvxm0"]
+[ext_resource type="Texture2D" uid="uid://rg522iyu0ss1" path="res://UI/music_button_on.tres" id="2_owosc"]
+[ext_resource type="Texture2D" uid="uid://be8hf2ouy4jdi" path="res://UI/music_button_off.tres" id="3_xus44"]
+[ext_resource type="Texture2D" uid="uid://nmjakurs8s1s" path="res://UI/sfx_button_on.tres" id="4_wgy6p"]
+[ext_resource type="Texture2D" uid="uid://bny0rnm6n46gx" path="res://UI/sfx_button_off.tres" id="5_bqnnx"]
+
+[sub_resource type="Theme" id="Theme_0q0po"]
+
+[node name="MainMenu" type="CanvasLayer"]
+process_mode = 3
+visible = false
+script = ExtResource("1_jvxm0")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_0q0po")
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 150
+theme_override_constants/margin_bottom = 150
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="ResumeButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MuteMusicButton" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_3kp6n")]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 0
+texture_normal = ExtResource("2_owosc")
+audio_stream_name = "Music"
+texture_not_muted = ExtResource("2_owosc")
+texture_muted = ExtResource("3_xus44")
+
+[node name="MuteSFXButton" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_3kp6n")]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+texture_normal = ExtResource("4_wgy6p")
+audio_stream_name = "SFX"
+texture_not_muted = ExtResource("4_wgy6p")
+texture_muted = ExtResource("5_bqnnx")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+
+[editable path="MarginContainer/VBoxContainer/HBoxContainer/MuteMusicButton"]
+[editable path="MarginContainer/VBoxContainer/HBoxContainer/MuteSFXButton"]

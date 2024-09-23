@@ -1,0 +1,25 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://bfxymy5g7g75u"]
+
+[ext_resource type="Texture2D" uid="uid://depwc873tafb6" path="res://music_button.png" id="1_c04vg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_41coq"]
+atlas = ExtResource("1_c04vg")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2s0dn"]
+atlas = ExtResource("1_c04vg")
+region = Rect2(64, 0, 64, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_41coq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2s0dn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

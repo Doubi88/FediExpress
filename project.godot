@@ -21,6 +21,7 @@ config/icon="res://Logo_single.png"
 GridData="*res://grid_data.gd"
 GlobalServerData="*res://global_server_data.gd"
 MusicPlayer="*res://Audio/music_player.tscn"
+MainMenu="*res://main_menu.tscn"
 
 [gui]
 

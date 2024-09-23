@@ -36,10 +36,6 @@ func _ready():
 		
 			
 func _process(delta: float) -> void:
-	if vehicle != null and vehicle.current_up_force != null:
-		var rot = vehicle.rotation - (PI / 2)
-		var rotation_vector = Vector2.from_angle(rot)
-		queue_redraw()
 	points_text.text = "Points: " + String.num(GlobalServerData.points)
 
 func _show_tutorial():
