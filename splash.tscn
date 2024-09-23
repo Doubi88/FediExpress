@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://yj2p0nl718sl"]
+[gd_scene load_steps=10 format=3 uid="uid://yj2p0nl718sl"]
 
 [ext_resource type="SpriteFrames" uid="uid://ctsupw0ofh6bc" path="res://logo_frames.tres" id="1_4ek7r"]
 [ext_resource type="Script" path="res://splash.gd" id="1_fq35p"]
 [ext_resource type="PackedScene" uid="uid://brj830wsnhnq1" path="res://CloudWorld/cloud_world.tscn" id="2_2l1ek"]
 [ext_resource type="PackedScene" uid="uid://bcstaa556rfxy" path="res://UI/mute_audio_bus_button.tscn" id="4_aihiw"]
+[ext_resource type="Script" path="res://UI/difficulty_button.gd" id="4_exh5l"]
 [ext_resource type="Texture2D" uid="uid://rg522iyu0ss1" path="res://UI/music_button_on.tres" id="5_fgypk"]
 [ext_resource type="Texture2D" uid="uid://be8hf2ouy4jdi" path="res://UI/music_button_off.tres" id="6_dpaym"]
 [ext_resource type="Texture2D" uid="uid://nmjakurs8s1s" path="res://UI/sfx_button_on.tres" id="7_fp8fp"]
@@ -20,14 +21,21 @@ scale = Vector2(7.65625, 7.65625)
 sprite_frames = ExtResource("1_4ek7r")
 
 [node name="Buttons" type="Node2D" parent="."]
-visible = false
 
 [node name="StartButton" type="Button" parent="Buttons"]
-offset_left = 393.0
-offset_top = 257.0
-offset_right = 541.0
-offset_bottom = 305.0
+offset_left = 397.0
+offset_top = 206.0
+offset_right = 545.0
+offset_bottom = 254.0
 text = "Start Game"
+
+[node name="DifficultyButton" type="Button" parent="Buttons"]
+offset_left = 371.0
+offset_top = 265.0
+offset_right = 569.0
+offset_bottom = 313.0
+text = "Difficulty: Easy"
+script = ExtResource("4_exh5l")
 
 [node name="MuteMusicButton" parent="Buttons" instance=ExtResource("4_aihiw")]
 offset_left = 397.0
@@ -44,8 +52,10 @@ offset_left = 477.0
 offset_top = 321.0
 offset_right = 539.0
 offset_bottom = 388.0
+texture_normal = ExtResource("7_fp8fp")
 audio_stream_name = "SFX"
 texture_not_muted = ExtResource("7_fp8fp")
 texture_muted = ExtResource("8_lcec4")
 
 [connection signal="pressed" from="Buttons/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Buttons/DifficultyButton" to="Buttons/DifficultyButton" method="_on_pressed"]

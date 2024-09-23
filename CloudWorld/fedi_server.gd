@@ -42,6 +42,7 @@ func _ready() -> void:
 	GlobalServerData.new_mission.connect(missions_changed)
 	GlobalServerData.mission_accepted.connect(missions_changed)
 	GlobalServerData.mission_delivered.connect(missions_changed)
+	GlobalServerData.mission_failed.connect(missions_changed)
 	if server_data != null:
 		missions_changed(null)
 

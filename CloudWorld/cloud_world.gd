@@ -36,7 +36,7 @@ func _ready():
 		
 			
 func _process(delta: float) -> void:
-	points_text.text = "Points: " + String.num(GlobalServerData.points)
+	points_text.text = "Points: " + String.num(GlobalServerData.points) + "\nFailed:" + String.num(GlobalServerData.failed_missions.size())
 
 func _show_tutorial():
 	var tutorial_window: DialogueWindow = preload("res://UI/dialogue.tscn").instantiate()

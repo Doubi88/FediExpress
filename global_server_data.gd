@@ -1,9 +1,30 @@
 extends Node
 
+enum Difficulty {
+	COZY, EASY, MEDIUM, HARD
+}
+
 var server_data: Array[FediServerData]
 var new_mission_interval_range = [5, 10] # Seconds
 var available_missions: Array[Mission]
 var accepted_missions: Array[Mission]
+var failed_missions: Array[Mission]
+
+@export var mission_expiration_seconds: int = 10 * 60
+@export var difficulty: Difficulty = Difficulty.EASY:
+	set(value):
+		difficulty = value
+		match difficulty:
+			Difficulty.COZY:
+				mission_expiration_seconds = 0
+			Difficulty.EASY:
+				mission_expiration_seconds = 10 * 60
+			Difficulty.MEDIUM:
+				mission_expiration_seconds = 5 + 60
+			Difficulty.HARD:
+				mission_expiration_seconds = 2 * 60
+	get:
+		return difficulty
 
 var points: int = 0
 
@@ -13,6 +34,20 @@ var next_mission_time: int = 0
 signal new_mission(mission: Mission)
 signal mission_accepted(mission: Mission);
 signal mission_delivered(mission: Mission);
+signal mission_failed(mission: Mission);
+
+func get_difficulty_name() -> String:
+	var result: String = ''
+	match difficulty:
+		Difficulty.COZY:
+			result = "Cozy"
+		Difficulty.EASY:
+			result = "Easy"
+		Difficulty.MEDIUM:
+			result = "Medium"
+		Difficulty.HARD:
+			result = "Hard"
+	return result
 
 func _process(delta: float) -> void:
 	if server_data.size() > 0:
@@ -20,11 +55,19 @@ func _process(delta: float) -> void:
 		if next_mission_time == 0:
 			next_mission_time = randi_range(new_mission_interval_range[0], new_mission_interval_range[1])
 		if elapsed_since_last_create_mission >= next_mission_time:
-			var mission = Mission.new()
+			var mission: Mission = Mission.new()
 			mission.from = server_data.pick_random().accounts.pick_random()
 			while mission.to == null or mission.to == mission.from:
 				mission.to = server_data.pick_random().accounts.pick_random()
-				
+			
+			mission.creation_second = Time.get_unix_time_from_system()
+
+			if mission_expiration_seconds > 0:
+				var timer: Timer = Timer.new()
+				add_child(timer)
+				timer.timeout.connect(func(): fail_mission(mission))
+				timer.start(mission_expiration_seconds)
+
 			available_missions.append(mission)
 			
 			next_mission_time = randi_range(new_mission_interval_range[0], new_mission_interval_range[1])
@@ -47,6 +90,12 @@ func deliver_mission(mission: Mission, account: FediAccountData) -> bool:
 		result = true
 		mission_delivered.emit(mission)
 	return result
+
+func fail_mission(mission: Mission):
+	var index = accepted_missions.find(mission)
+	accepted_missions.remove_at(index)
+	failed_missions.append(mission)
+	mission_failed.emit(mission)
 
 func has_mission_from_account(account: FediAccountData) -> bool:
 	var result := false

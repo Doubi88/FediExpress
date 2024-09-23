@@ -19,19 +19,41 @@ func _ready() -> void:
 	GlobalServerData.new_mission.connect(update_missions)
 	GlobalServerData.mission_accepted.connect(update_missions)
 	GlobalServerData.mission_delivered.connect(update_missions)
+	GlobalServerData.mission_failed.connect(update_missions)
+
+func _process(_delta: float) -> void:
+	update_mission_timers()
 
 func update_caption() -> void:
 	if account != null and captionLabel != null:
 		captionLabel.text = 'Missions from ' + account.account_name + '@' + account.fedi_server.server_name
 	
-func update_missions(updated_mission: Mission):
+func update_mission_timers():
+	for index in range(available.item_count):
+		var mission: Mission = available.get_item_metadata(index)
+		var text: String = generate_item_text(mission)
+		available.set_item_text(index, text)
+
+	for index in range(accepted.item_count):
+		var mission: Mission = accepted.get_item_metadata(index)
+		var text: String = generate_item_text(mission)
+		accepted.set_item_text(index, text)
+
+func generate_item_text(mission: Mission) -> String:
+	var mission_time: float = GlobalServerData.mission_expiration_seconds - (Time.get_unix_time_from_system() - mission.creation_second)
+	var mission_time_dict: Dictionary = Time.get_time_dict_from_unix_time(round(mission_time) as int)
+	var mission_time_text: String = String.num(mission_time_dict.minute) + ":" + String.num(mission_time_dict.second)
+	return mission.to.account_name + '@' + mission.to.fedi_server.server_name + ' ' + mission_time_text
+
+func update_missions(_updated_mission: Mission):
 	var index: int = 0
 	for mission in GlobalServerData.available_missions:
 		if mission.from == account:
+			var text: String = generate_item_text(mission)
 			if available.item_count < (index + 1):
-				available.add_item(mission.to.account_name + '@' + mission.to.fedi_server.server_name)
+				available.add_item(text)
 			else:
-				available.set_item_text(index, mission.to.account_name + '@' + mission.to.fedi_server.server_name)
+				available.set_item_text(index, text)
 			available.set_item_metadata(index, mission)
 			index += 1
 	if available.item_count > index:
@@ -39,10 +61,11 @@ func update_missions(updated_mission: Mission):
 	
 	index = 0
 	for mission in GlobalServerData.accepted_missions:
+		var text: String = generate_item_text(mission)
 		if (accepted.item_count < index + 1):
-			accepted.add_item(mission.to.account_name + '@' + mission.to.fedi_server.server_name)
+			accepted.add_item(text)
 		else:
-			accepted.set_item_text(index, mission.to.account_name + '@' + mission.to.fedi_server.server_name)
+			accepted.set_item_text(index, text)
 			
 		accepted.set_item_metadata(index, mission)
 		accepted.set_item_disabled(index, mission.to != account)

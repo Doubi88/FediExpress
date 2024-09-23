@@ -54,9 +54,11 @@ parameters/looping = true
 
 [node name="MotorStartPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_sh3lu")
+bus = &"SFX"
 
 [node name="MotorStopPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_00ftf")
+bus = &"SFX"
 
 [node name="FrontLogo" type="Sprite2D" parent="."]
 position = Vector2(-19, 5)
