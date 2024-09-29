@@ -40,10 +40,12 @@ func update_mission_timers():
 		accepted.set_item_text(index, text)
 
 func generate_item_text(mission: Mission) -> String:
-	var mission_time: float = GlobalServerData.mission_expiration_seconds - (Time.get_unix_time_from_system() - mission.creation_second)
-	var mission_time_dict: Dictionary = Time.get_time_dict_from_unix_time(round(mission_time) as int)
-	var mission_time_text: String = String.num(mission_time_dict.minute) + ":" + String.num(mission_time_dict.second)
-	return mission.to.account_name + '@' + mission.to.fedi_server.server_name + ' ' + mission_time_text
+	var mission_time_text := ""
+	if GlobalServerData.mission_expiration_seconds > 0:
+		var mission_time: float = GlobalServerData.mission_expiration_seconds - (Time.get_unix_time_from_system() - mission.creation_second)
+		var mission_time_dict: Dictionary = Time.get_time_dict_from_unix_time(round(mission_time) as int)
+		mission_time_text = ' ' + String.num(mission_time_dict.minute) + ":" + String.num(mission_time_dict.second)
+	return mission.to.account_name + '@' + mission.to.fedi_server.server_name + mission_time_text
 
 func update_missions(_updated_mission: Mission):
 	var index: int = 0

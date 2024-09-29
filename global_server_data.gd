@@ -26,6 +26,10 @@ var failed_missions: Array[Mission]
 	get:
 		return difficulty
 
+@export var goal_deliveries := 0
+@export var max_failures := 0
+@export var time_limit_seconds := 0.0
+
 var points: int = 0
 
 var elapsed_since_last_create_mission: float = 0

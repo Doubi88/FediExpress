@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://yj2p0nl718sl"]
+[gd_scene load_steps=11 format=3 uid="uid://yj2p0nl718sl"]
 
 [ext_resource type="SpriteFrames" uid="uid://ctsupw0ofh6bc" path="res://logo_frames.tres" id="1_4ek7r"]
 [ext_resource type="Script" path="res://splash.gd" id="1_fq35p"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://be8hf2ouy4jdi" path="res://UI/music_button_off.tres" id="6_dpaym"]
 [ext_resource type="Texture2D" uid="uid://nmjakurs8s1s" path="res://UI/sfx_button_on.tres" id="7_fp8fp"]
 [ext_resource type="Texture2D" uid="uid://bny0rnm6n46gx" path="res://UI/sfx_button_off.tres" id="8_lcec4"]
+[ext_resource type="PackedScene" uid="uid://cp1ji2i1fdgqf" path="res://UI/volume_slider.tscn" id="10_muem5"]
 
 [node name="Splash" type="Node2D"]
 texture_filter = 1
@@ -23,39 +24,53 @@ sprite_frames = ExtResource("1_4ek7r")
 [node name="Buttons" type="Node2D" parent="."]
 
 [node name="StartButton" type="Button" parent="Buttons"]
-offset_left = 397.0
-offset_top = 206.0
-offset_right = 545.0
-offset_bottom = 254.0
+offset_left = 398.0
+offset_top = 136.0
+offset_right = 546.0
+offset_bottom = 184.0
 text = "Start Game"
 
 [node name="DifficultyButton" type="Button" parent="Buttons"]
-offset_left = 371.0
-offset_top = 265.0
-offset_right = 569.0
-offset_bottom = 313.0
+offset_left = 372.0
+offset_top = 195.0
+offset_right = 570.0
+offset_bottom = 243.0
 text = "Difficulty: Easy"
 script = ExtResource("4_exh5l")
 
 [node name="MuteMusicButton" parent="Buttons" instance=ExtResource("4_aihiw")]
-offset_left = 397.0
-offset_top = 322.0
-offset_right = 459.0
-offset_bottom = 389.0
+offset_left = 327.0
+offset_top = 357.0
+offset_right = 391.0
+offset_bottom = 421.0
 texture_normal = ExtResource("5_fgypk")
 audio_stream_name = "Music"
 texture_not_muted = ExtResource("5_fgypk")
 texture_muted = ExtResource("6_dpaym")
 
 [node name="MuteAudioBusButton" parent="Buttons" instance=ExtResource("4_aihiw")]
-offset_left = 477.0
-offset_top = 321.0
-offset_right = 539.0
-offset_bottom = 388.0
+offset_left = 328.0
+offset_top = 435.0
+offset_right = 392.0
+offset_bottom = 502.0
 texture_normal = ExtResource("7_fp8fp")
 audio_stream_name = "SFX"
 texture_not_muted = ExtResource("7_fp8fp")
 texture_muted = ExtResource("8_lcec4")
+
+[node name="MusicVolumeSlider" parent="Buttons" instance=ExtResource("10_muem5")]
+offset_left = 413.0
+offset_top = 376.0
+offset_right = 589.0
+offset_bottom = 397.0
+audio_bus_name = "Music"
+
+[node name="SFXVolumeSlider2" parent="Buttons" instance=ExtResource("10_muem5")]
+offset_left = 413.0
+offset_top = 452.0
+offset_right = 589.0
+offset_bottom = 473.0
+audio_bus_name = "SFX"
 
 [connection signal="pressed" from="Buttons/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Buttons/DifficultyButton" to="Buttons/DifficultyButton" method="_on_pressed"]
