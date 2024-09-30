@@ -20,17 +20,17 @@ var failed_missions: Array[Mission]
 			Difficulty.COZY:
 				mission_expiration_seconds = 0
 			Difficulty.EASY:
-				mission_expiration_seconds = 10 * 60
+				mission_expiration_seconds = 8 * 60
 			Difficulty.MEDIUM:
-				mission_expiration_seconds = 5 + 60
+				mission_expiration_seconds = 5 * 60
 			Difficulty.HARD:
 				mission_expiration_seconds = 2 * 60
 	get:
 		return difficulty
 
-@export var goal_deliveries := 0
-@export var max_failures := 0
-@export var time_limit_seconds := 0.0
+@export var goal_deliveries := 10
+@export var max_failures := 5
+@export var time_limit_seconds := 600.0
 var remaining_time: float
 var timer_started: bool = false
 
