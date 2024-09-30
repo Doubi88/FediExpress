@@ -3,7 +3,10 @@ extends AudioStreamPlayer
 @onready var tracks: Array[AudioStream] = [
 	preload("res://Audio/just-relax-11157.mp3"),
 	preload("res://Audio/my-life-main-6670.mp3"),
-	preload("res://Audio/coniferous-forest-142569.mp3")
+	preload("res://Audio/coniferous-forest-142569.mp3"),
+	preload("res://Audio/forest-lullaby-110624.mp3"),
+	preload("res://Audio/leva-eternity-149473.mp3"),
+	preload("res://Audio/summer-walk-152722.mp3")
 ]
 
 var current := -1

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://de077qmf65hq4"]
+[gd_scene load_steps=8 format=3 uid="uid://de077qmf65hq4"]
 
 [ext_resource type="Script" path="res://TopDownWorld/server_world.gd" id="1_t6ntf"]
 [ext_resource type="TileSet" uid="uid://dh05hcttl2uk2" path="res://TopDownWorld/tileset.tres" id="2_gvcic"]
+[ext_resource type="Texture2D" uid="uid://bbd8u52hfelmf" path="res://CloudWorld/sky.png" id="2_oejae"]
 [ext_resource type="Script" path="res://TargetCamera.gd" id="3_s6wta"]
 [ext_resource type="PackedScene" uid="uid://1bxnxjuqhb07" path="res://TopDownWorld/top_down_player.tscn" id="4_oxbcu"]
 [ext_resource type="Texture2D" uid="uid://caxci8gjhqq5h" path="res://TopDownWorld/background.png" id="5_yeabc"]
@@ -11,24 +12,23 @@
 texture_filter = 1
 script = ExtResource("1_t6ntf")
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="TargetCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+zoom = Vector2(2.5, 2.5)
+script = ExtResource("3_s6wta")
+target = NodePath("../TopDownPlayer")
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(1.5, 1.5)
+[node name="Sprite2D" type="Sprite2D" parent="TargetCamera"]
+scale = Vector2(10.0312, 6.30469)
+texture = ExtResource("2_oejae")
 
-[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(196, 237)
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(310, 321)
 scale = Vector2(7, 7)
 texture = ExtResource("5_yeabc")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 use_parent_material = true
 tile_set = ExtResource("2_gvcic")
-
-[node name="TargetCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
-zoom = Vector2(2.5, 2.5)
-script = ExtResource("3_s6wta")
-target = NodePath("../TopDownPlayer")
 
 [node name="TopDownPlayer" parent="." instance=ExtResource("4_oxbcu")]
 

@@ -18,12 +18,12 @@ config/icon="res://Logo_single.png"
 
 [autoload]
 
+Dialogue="*res://UI/dialogue.tscn"
 GridData="*res://grid_data.gd"
-GlobalServerData="*res://global_server_data.gd"
 MusicPlayer="*res://Audio/music_player.tscn"
+GlobalServerData="*res://global_server_data.gd"
 MainMenu="*res://main_menu.tscn"
 AudioSignals="*res://UI/audio_signals.gd"
-Dialogue="*res://UI/dialogue.tscn"
 GameOverScreen="*res://UI/game_over_screen.tscn"
 SceneSwitcher="*res://scene_switcher.gd"
 

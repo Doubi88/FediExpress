@@ -35,7 +35,9 @@ func _ready():
 	_show_tutorial()
 
 func _show_tutorial():
-	Dialogue.text_pages = [
+	Dialogue.speaker_name = "Chief Godot"
+	Dialogue.current_page = 0
+	var text_pages: Array[String] = [
 		"Greetings! Welcome to your new job in the fediverse! " + \
 		"If you didn't know already: Your job is to deliver " + \
 		"posts around the servers and accounts.",
@@ -48,8 +50,7 @@ func _show_tutorial():
 		"When you're ready, return to your helicopter and press F or Enter again.",
 		"That's everything you need to know. Good luck!"
 	]
-								  
-	Dialogue.speaker_name = "Chief Godot"
-	Dialogue.current_page = 0
+	Dialogue.text_pages_array = text_pages
+	
 	Dialogue.show()
 	

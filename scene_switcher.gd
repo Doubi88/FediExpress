@@ -9,6 +9,8 @@ var current_server_world: ServerWorld
 
 var current_server: FediServerData
 
+signal resetting_game()
+
 func go_to_cloud_world():
 	if cloud_world == null:
 		cloud_world = cloud_world_packed.instantiate()
@@ -28,6 +30,7 @@ func go_to_server_world(data: FediServerData):
 		get_tree().root.remove_child(cloud_world)
 		
 func restart():
+	resetting_game.emit()
 	if current_server_world != null:
 		current_server_world.get_parent().remove_child(current_server_world)
 		current_server_world.queue_free()
