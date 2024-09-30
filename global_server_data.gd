@@ -4,6 +4,8 @@ enum Difficulty {
 	COZY, EASY, MEDIUM, HARD
 }
 
+signal game_over_now()
+
 var server_data: Array[FediServerData]
 var new_mission_interval_range = [5, 10] # Seconds
 var available_missions: Array[Mission]
@@ -29,6 +31,8 @@ var failed_missions: Array[Mission]
 @export var goal_deliveries := 0
 @export var max_failures := 0
 @export var time_limit_seconds := 0.0
+var remaining_time: float
+var timer_started: bool = false
 
 var points: int = 0
 
@@ -41,6 +45,7 @@ signal mission_delivered(mission: Mission);
 signal mission_failed(mission: Mission);
 
 func get_difficulty_name() -> String:
+	Time.get_unix_time_from_system()
 	var result: String = ''
 	match difficulty:
 		Difficulty.COZY:
@@ -53,7 +58,25 @@ func get_difficulty_name() -> String:
 			result = "Hard"
 	return result
 
+func update_timer(delta: float) -> void:
+	if timer_started and time_limit_seconds > 0:
+		remaining_time -= delta
+
+func start_timer():
+	remaining_time = time_limit_seconds
+	timer_started = true
+	
+func is_game_over() -> bool:
+	var result := false
+	if timer_started:
+		if (time_limit_seconds > 0 and remaining_time <= 0) or \
+			(goal_deliveries > 0 and points >= goal_deliveries) or \
+			(max_failures > 0 and failed_missions.size() >= max_failures):
+			result = true
+	return result
+		
 func _process(delta: float) -> void:
+	update_timer(delta)
 	if server_data.size() > 0:
 		elapsed_since_last_create_mission += delta
 		if next_mission_time == 0:
@@ -77,7 +100,22 @@ func _process(delta: float) -> void:
 			next_mission_time = randi_range(new_mission_interval_range[0], new_mission_interval_range[1])
 			elapsed_since_last_create_mission = 0
 			new_mission.emit(mission)
-		
+	if is_game_over():
+		game_over()
+
+func game_over():
+	timer_started = false
+	get_tree().paused = true
+	game_over_now.emit()
+
+func reset() -> void:
+	timer_started = false
+	points = 0
+	failed_missions.clear()
+	accepted_missions.clear()
+	available_missions.clear()
+	server_data.clear()
+	
 func accept_mission(mission: Mission) -> void:
 	var index = available_missions.find(mission)
 	if index >= 0:

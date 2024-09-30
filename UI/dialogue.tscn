@@ -42,6 +42,9 @@ size_flags_horizontal = 3
 
 [node name="NextButton" type="Button" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
-text = ">"
+theme_override_font_sizes/font_size = 30
+text = "[Q]
+
+>"
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]

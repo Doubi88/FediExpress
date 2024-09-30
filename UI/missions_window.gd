@@ -20,6 +20,8 @@ func _ready() -> void:
 	GlobalServerData.mission_accepted.connect(update_missions)
 	GlobalServerData.mission_delivered.connect(update_missions)
 	GlobalServerData.mission_failed.connect(update_missions)
+	
+	GlobalServerData.game_over_now.connect(hide)
 
 func _process(_delta: float) -> void:
 	update_mission_timers()

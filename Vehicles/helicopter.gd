@@ -88,12 +88,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if landed_on_server != null:
 		if event.is_action_pressed("enter_leave vehicle"):
-			var server_scene: ServerWorld = preload("res://TopDownWorld/server_world.tscn").instantiate()
-			server_scene.server_data = landed_on_server.server_data
-			get_tree().root.add_child(server_scene)
-			var cloud_world = get_node("/root/CloudWorld")
-			get_tree().root.remove_child(cloud_world)
-			server_scene.cloud_world = cloud_world
+			SceneSwitcher.go_to_server_world(landed_on_server.server_data)
 		elif event.is_action_pressed("reset vehicle"):
 			do_reset = true
 			apply_central_force(Vector2.ZERO) # Wake the rigid body up, so _integrate_forces is called

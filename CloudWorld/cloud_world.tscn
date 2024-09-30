@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bbd8u52hfelmf" path="res://CloudWorld/sky.png" id="3_eplds"]
 [ext_resource type="Script" path="res://CloudWorld/navigation.gd" id="4_ar3cw"]
 [ext_resource type="Script" path="res://TargetCamera.gd" id="4_o5g1a"]
-[ext_resource type="Theme" uid="uid://ochiaokyyqk4" path="res://theme.tres" id="5_bjd4r"]
+[ext_resource type="PackedScene" uid="uid://crdwctj7m6f4i" path="res://UI/points_ui.tscn" id="5_kdmqo"]
 
 [node name="CloudWorld" type="Node2D"]
 texture_filter = 1
@@ -25,17 +25,11 @@ texture = ExtResource("3_eplds")
 [node name="TargetCamera" type="Camera2D" parent="."]
 script = ExtResource("4_o5g1a")
 
-[node name="CanvasGroup" type="CanvasLayer" parent="."]
-
-[node name="PointsText" type="Label" parent="CanvasGroup"]
-offset_right = 40.0
-offset_bottom = 23.0
-theme = ExtResource("5_bjd4r")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-
 [node name="Navigation" type="Node2D" parent="."]
 script = ExtResource("4_ar3cw")
 color = Color(0.167429, 0.457093, 0.308468, 1)
 width = 5
 distance = 25
 length = 25
+
+[node name="PointsUI" parent="." instance=ExtResource("5_kdmqo")]

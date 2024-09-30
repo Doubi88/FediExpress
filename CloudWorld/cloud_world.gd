@@ -2,7 +2,6 @@ extends Node2D
 
 class_name CloudWorld
 
-@onready var points_text: Label = $CanvasGroup/PointsText
 @onready var cam: Camera2D = $TargetCamera
 @onready var navigation = $Navigation
 
@@ -32,11 +31,8 @@ func _ready():
 
 	navigation.start = vehicle
 	navigation.goals.append_array(servers)
+	GlobalServerData.start_timer()
 	_show_tutorial()
-		
-			
-func _process(delta: float) -> void:
-	points_text.text = "Points: " + String.num(GlobalServerData.points) + "\nFailed:" + String.num(GlobalServerData.failed_missions.size())
 
 func _show_tutorial():
 	Dialogue.text_pages = [
@@ -54,5 +50,6 @@ func _show_tutorial():
 	]
 								  
 	Dialogue.speaker_name = "Chief Godot"
+	Dialogue.current_page = 0
 	Dialogue.show()
 	

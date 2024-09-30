@@ -27,14 +27,19 @@ extends CanvasLayer
 
 func _ready() -> void:
 	update_view()
+	GlobalServerData.game_over_now.connect(hide)
 
 func update_view() -> void:
 	if label != null and text_pages != null and current_page < text_pages.size():
 		label.text = text_pages[current_page]
 	if current_page + 1 >= text_pages.size():
-		button.text = 'X'
+		button.text = '[Q]
+
+X'
 	else:
-		button.text = '>'
+		button.text = '[Q]
+
+>'
 	if speaker_name != null:
 		name_label.text = speaker_name
 		name_label.show()
@@ -47,3 +52,7 @@ func _on_next_button_pressed() -> void:
 		hide()
 	else:
 		current_page += 1
+
+func _unhandled_input(event: InputEvent) -> void:
+	if visible and event.is_action_pressed("dialogue next"):
+		_on_next_button_pressed()
