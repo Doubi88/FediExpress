@@ -91,7 +91,7 @@ func generate_neighbourhood(accounts: Array[FediAccountData]) -> Vector2i:
 				generate_tiles_square(pi * 2, Vector2i(GROUND_ATLAS_X, GROUND_ATLAS_Y))
 
 				var house: FediAccountHouse = house_scene.instantiate()
-				get_child(0).add_sibling(house)
+				tilemap.add_sibling(house)
 				house.account_data = house_positions[pos]
 				house.position = tilemap.map_to_local(pi * 2) + (Vector2(tilemap.tile_set.tile_size) / 2.0)
 			else:

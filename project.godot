@@ -32,11 +32,6 @@ SceneSwitcher="*res://scene_switcher.gd"
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
 
-[display]
-
-window/stretch/mode="viewport"
-window/stretch/scale_mode="integer"
-
 [gui]
 
 theme/custom="res://theme.tres"
