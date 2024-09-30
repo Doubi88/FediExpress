@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dpkef3iavhts6"]
+[gd_scene load_steps=9 format=3 uid="uid://dpkef3iavhts6"]
 
 [ext_resource type="PackedScene" uid="uid://bcstaa556rfxy" path="res://UI/mute_audio_bus_button.tscn" id="1_3kp6n"]
 [ext_resource type="Script" path="res://main_menu.gd" id="1_jvxm0"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://be8hf2ouy4jdi" path="res://UI/music_button_off.tres" id="3_xus44"]
 [ext_resource type="Texture2D" uid="uid://nmjakurs8s1s" path="res://UI/sfx_button_on.tres" id="4_wgy6p"]
 [ext_resource type="Texture2D" uid="uid://bny0rnm6n46gx" path="res://UI/sfx_button_off.tres" id="5_bqnnx"]
+[ext_resource type="PackedScene" uid="uid://cp1ji2i1fdgqf" path="res://UI/volume_slider.tscn" id="5_gedyw"]
 
 [sub_resource type="Theme" id="Theme_0q0po"]
 
@@ -35,29 +36,45 @@ layout_mode = 2
 layout_mode = 2
 text = "Resume"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="MusicContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MuteMusicButton" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_3kp6n")]
-layout_mode = 2
-size_flags_horizontal = 10
 size_flags_vertical = 0
+
+[node name="MuteMusicButton" parent="MarginContainer/VBoxContainer/MusicContainer" instance=ExtResource("1_3kp6n")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
 texture_normal = ExtResource("2_owosc")
 audio_stream_name = "Music"
 texture_not_muted = ExtResource("2_owosc")
 texture_muted = ExtResource("3_xus44")
 
-[node name="MuteSFXButton" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_3kp6n")]
+[node name="MusicVolumeSlider" parent="MarginContainer/VBoxContainer/MusicContainer" instance=ExtResource("5_gedyw")]
 layout_mode = 2
-size_flags_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+audio_bus_name = "Music"
+
+[node name="SFXContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
 size_flags_vertical = 0
+
+[node name="MuteSFXButton" parent="MarginContainer/VBoxContainer/SFXContainer" instance=ExtResource("1_3kp6n")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
 texture_normal = ExtResource("4_wgy6p")
 audio_stream_name = "SFX"
 texture_not_muted = ExtResource("4_wgy6p")
 texture_muted = ExtResource("5_bqnnx")
 
+[node name="SFXVolumeSlider" parent="MarginContainer/VBoxContainer/SFXContainer" instance=ExtResource("5_gedyw")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+audio_bus_name = "SFX"
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 
-[editable path="MarginContainer/VBoxContainer/HBoxContainer/MuteMusicButton"]
-[editable path="MarginContainer/VBoxContainer/HBoxContainer/MuteSFXButton"]
+[editable path="MarginContainer/VBoxContainer/MusicContainer/MuteMusicButton"]
+[editable path="MarginContainer/VBoxContainer/SFXContainer/MuteSFXButton"]

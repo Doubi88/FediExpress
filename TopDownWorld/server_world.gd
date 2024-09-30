@@ -110,8 +110,4 @@ func on_helipad_body_exited(body: Node2D) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if can_leave:
 		if event.is_action_pressed("enter_leave vehicle"):
-			if cloud_world == null:
-				var cloud_world_packed = preload("res://CloudWorld/cloud_world.gd")
-				cloud_world = cloud_world_packed.instantiate()
-			get_tree().root.add_child(cloud_world)
-			queue_free()
+			SceneSwitcher.go_to_cloud_world()

@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://ochiaokyyqk4"]
 
 [sub_resource type="SystemFont" id="SystemFont_kypwn"]
-font_names = PackedStringArray("DejaVu Sans", "Sans-Serif")
+font_names = PackedStringArray("Noto Sans", "Sans-Serif")
 
 [resource]
 default_font = SubResource("SystemFont_kypwn")

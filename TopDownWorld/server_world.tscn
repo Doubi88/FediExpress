@@ -1,14 +1,25 @@
-[gd_scene load_steps=6 format=3 uid="uid://de077qmf65hq4"]
+[gd_scene load_steps=7 format=3 uid="uid://de077qmf65hq4"]
 
 [ext_resource type="Script" path="res://TopDownWorld/server_world.gd" id="1_t6ntf"]
 [ext_resource type="TileSet" uid="uid://dh05hcttl2uk2" path="res://TopDownWorld/tileset.tres" id="2_gvcic"]
 [ext_resource type="Script" path="res://TargetCamera.gd" id="3_s6wta"]
 [ext_resource type="PackedScene" uid="uid://1bxnxjuqhb07" path="res://TopDownWorld/top_down_player.tscn" id="4_oxbcu"]
 [ext_resource type="Texture2D" uid="uid://caxci8gjhqq5h" path="res://TopDownWorld/background.png" id="5_yeabc"]
+[ext_resource type="PackedScene" uid="uid://crdwctj7m6f4i" path="res://UI/points_ui.tscn" id="6_bcdr0"]
 
 [node name="ServerWorld" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_t6ntf")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(1.5, 1.5)
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(196, 237)
+scale = Vector2(7, 7)
+texture = ExtResource("5_yeabc")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 use_parent_material = true
@@ -21,12 +32,4 @@ target = NodePath("../TopDownPlayer")
 
 [node name="TopDownPlayer" parent="." instance=ExtResource("4_oxbcu")]
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(1.5, 1.5)
-
-[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(196, 237)
-scale = Vector2(7, 7)
-texture = ExtResource("5_yeabc")
+[node name="CanvasGroup" parent="." instance=ExtResource("6_bcdr0")]

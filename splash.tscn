@@ -1,61 +1,121 @@
-[gd_scene load_steps=10 format=3 uid="uid://yj2p0nl718sl"]
+[gd_scene load_steps=13 format=3 uid="uid://yj2p0nl718sl"]
 
 [ext_resource type="SpriteFrames" uid="uid://ctsupw0ofh6bc" path="res://logo_frames.tres" id="1_4ek7r"]
 [ext_resource type="Script" path="res://splash.gd" id="1_fq35p"]
-[ext_resource type="PackedScene" uid="uid://brj830wsnhnq1" path="res://CloudWorld/cloud_world.tscn" id="2_2l1ek"]
 [ext_resource type="PackedScene" uid="uid://bcstaa556rfxy" path="res://UI/mute_audio_bus_button.tscn" id="4_aihiw"]
 [ext_resource type="Script" path="res://UI/difficulty_button.gd" id="4_exh5l"]
+[ext_resource type="Script" path="res://UI/time_limit_spinner.gd" id="5_4xqxv"]
 [ext_resource type="Texture2D" uid="uid://rg522iyu0ss1" path="res://UI/music_button_on.tres" id="5_fgypk"]
 [ext_resource type="Texture2D" uid="uid://be8hf2ouy4jdi" path="res://UI/music_button_off.tres" id="6_dpaym"]
+[ext_resource type="Script" path="res://UI/goal_spin_box.gd" id="6_kpqbu"]
+[ext_resource type="Script" path="res://UI/max_failed_spinner.gd" id="7_fd7ci"]
 [ext_resource type="Texture2D" uid="uid://nmjakurs8s1s" path="res://UI/sfx_button_on.tres" id="7_fp8fp"]
 [ext_resource type="Texture2D" uid="uid://bny0rnm6n46gx" path="res://UI/sfx_button_off.tres" id="8_lcec4"]
+[ext_resource type="PackedScene" uid="uid://cp1ji2i1fdgqf" path="res://UI/volume_slider.tscn" id="10_muem5"]
 
 [node name="Splash" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_fq35p")
-next_scene = ExtResource("2_2l1ek")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(574, 312)
 scale = Vector2(7.65625, 7.65625)
 sprite_frames = ExtResource("1_4ek7r")
 
-[node name="Buttons" type="Node2D" parent="."]
+[node name="Buttons" type="VBoxContainer" parent="."]
+visible = false
+offset_left = 129.0
+offset_top = 171.0
+offset_right = 575.0
+offset_bottom = 439.0
 
 [node name="StartButton" type="Button" parent="Buttons"]
-offset_left = 397.0
-offset_top = 206.0
-offset_right = 545.0
-offset_bottom = 254.0
+layout_mode = 2
 text = "Start Game"
 
 [node name="DifficultyButton" type="Button" parent="Buttons"]
-offset_left = 371.0
-offset_top = 265.0
-offset_right = 569.0
-offset_bottom = 313.0
+layout_mode = 2
 text = "Difficulty: Easy"
 script = ExtResource("4_exh5l")
 
-[node name="MuteMusicButton" parent="Buttons" instance=ExtResource("4_aihiw")]
-offset_left = 397.0
-offset_top = 322.0
-offset_right = 459.0
-offset_bottom = 389.0
+[node name="GridContainer" type="GridContainer" parent="Buttons"]
+layout_mode = 2
+columns = 2
+
+[node name="TimeLimitLabel" type="Label" parent="Buttons/GridContainer"]
+layout_mode = 2
+text = "Time Limit"
+
+[node name="TimeLimitFlow" type="HFlowContainer" parent="Buttons/GridContainer"]
+layout_mode = 2
+script = ExtResource("5_4xqxv")
+
+[node name="MinutesSpinner" type="SpinBox" parent="Buttons/GridContainer/TimeLimitFlow"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 10000.0
+suffix = " min"
+
+[node name="SecondsSpinner" type="SpinBox" parent="Buttons/GridContainer/TimeLimitFlow"]
+layout_mode = 2
+max_value = 59.0
+suffix = " s"
+
+[node name="GoalLabel" type="Label" parent="Buttons/GridContainer"]
+layout_mode = 2
+text = "Goal"
+
+[node name="GoalSpinBox" type="SpinBox" parent="Buttons/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("6_kpqbu")
+
+[node name="MaxFailedLabel" type="Label" parent="Buttons/GridContainer"]
+layout_mode = 2
+text = "Maximum Failures
+"
+
+[node name="MaxFailedSpinBox" type="SpinBox" parent="Buttons/GridContainer"]
+layout_mode = 2
+script = ExtResource("7_fd7ci")
+
+[node name="MusicVolume" type="HBoxContainer" parent="Buttons"]
+layout_mode = 2
+
+[node name="MuteMusicButton" parent="Buttons/MusicVolume" instance=ExtResource("4_aihiw")]
+layout_mode = 2
+size_flags_horizontal = 0
 texture_normal = ExtResource("5_fgypk")
 audio_stream_name = "Music"
 texture_not_muted = ExtResource("5_fgypk")
 texture_muted = ExtResource("6_dpaym")
 
-[node name="MuteAudioBusButton" parent="Buttons" instance=ExtResource("4_aihiw")]
-offset_left = 477.0
-offset_top = 321.0
-offset_right = 539.0
-offset_bottom = 388.0
+[node name="MusicVolumeSlider" parent="Buttons/MusicVolume" instance=ExtResource("10_muem5")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+audio_bus_name = "Music"
+
+[node name="SoundVolume" type="HBoxContainer" parent="Buttons"]
+layout_mode = 2
+
+[node name="MuteAudioBusButton" parent="Buttons/SoundVolume" instance=ExtResource("4_aihiw")]
+layout_mode = 2
+size_flags_horizontal = 0
 texture_normal = ExtResource("7_fp8fp")
 audio_stream_name = "SFX"
 texture_not_muted = ExtResource("7_fp8fp")
 texture_muted = ExtResource("8_lcec4")
 
+[node name="SFXVolumeSlider2" parent="Buttons/SoundVolume" instance=ExtResource("10_muem5")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+audio_bus_name = "SFX"
+
 [connection signal="pressed" from="Buttons/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Buttons/DifficultyButton" to="Buttons/DifficultyButton" method="_on_pressed"]
+[connection signal="value_changed" from="Buttons/GridContainer/TimeLimitFlow/MinutesSpinner" to="Buttons/GridContainer/TimeLimitFlow" method="_on_minutes_spinner_value_changed"]
+[connection signal="value_changed" from="Buttons/GridContainer/TimeLimitFlow/SecondsSpinner" to="Buttons/GridContainer/TimeLimitFlow" method="_on_seconds_spinner_value_changed"]
+[connection signal="value_changed" from="Buttons/GridContainer/GoalSpinBox" to="Buttons/GridContainer/GoalSpinBox" method="_on_value_changed"]
+[connection signal="value_changed" from="Buttons/GridContainer/MaxFailedSpinBox" to="Buttons/GridContainer/MaxFailedSpinBox" method="_on_value_changed"]
