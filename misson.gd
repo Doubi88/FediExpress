@@ -6,5 +6,3 @@ class_name Mission
 @export var to: FediAccountData
 
 var creation_second: float
-
-

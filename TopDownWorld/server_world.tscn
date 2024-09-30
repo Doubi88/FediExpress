@@ -15,7 +15,7 @@ use_parent_material = true
 tile_set = ExtResource("2_gvcic")
 
 [node name="TargetCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
-zoom = Vector2(2, 2)
+zoom = Vector2(2.5, 2.5)
 script = ExtResource("3_s6wta")
 target = NodePath("../TopDownPlayer")
 

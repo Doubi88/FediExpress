@@ -1,29 +1,29 @@
 [gd_scene load_steps=9 format=3 uid="uid://1bxnxjuqhb07"]
 
 [ext_resource type="Script" path="res://TopDownWorld/top_down_player.gd" id="1_rc4vk"]
-[ext_resource type="Texture2D" uid="uid://dmmvn7yn5hs0e" path="res://new_character_bold.png" id="2_iu24b"]
+[ext_resource type="Texture2D" uid="uid://gj7mb0g2yh2p" path="res://new_character.png" id="2_mp1rp"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i2f0p"]
-atlas = ExtResource("2_iu24b")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjrmg"]
+atlas = ExtResource("2_mp1rp")
+region = Rect2(0, 0, 32, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ie4ij"]
-atlas = ExtResource("2_iu24b")
-region = Rect2(96, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_lqy1c"]
+atlas = ExtResource("2_mp1rp")
+region = Rect2(96, 0, 32, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fil7w"]
-atlas = ExtResource("2_iu24b")
-region = Rect2(64, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxf8y"]
+atlas = ExtResource("2_mp1rp")
+region = Rect2(64, 0, 32, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1ckmu"]
-atlas = ExtResource("2_iu24b")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_je454"]
+atlas = ExtResource("2_mp1rp")
+region = Rect2(32, 0, 32, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_n6b1b"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i2f0p")
+"texture": SubResource("AtlasTexture_pjrmg")
 }],
 "loop": true,
 "name": &"down",
@@ -31,7 +31,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ie4ij")
+"texture": SubResource("AtlasTexture_lqy1c")
 }],
 "loop": true,
 "name": &"left",
@@ -39,7 +39,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fil7w")
+"texture": SubResource("AtlasTexture_uxf8y")
 }],
 "loop": true,
 "name": &"right",
@@ -47,7 +47,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1ckmu")
+"texture": SubResource("AtlasTexture_je454")
 }],
 "loop": true,
 "name": &"up",
@@ -55,18 +55,19 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_urcc8"]
-radius = 15.0
-height = 32.0
+radius = 6.0
+height = 18.0
 
 [node name="TopDownPlayer" type="CharacterBody2D"]
 script = ExtResource("1_rc4vk")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_n6b1b")
-animation = &"up"
+animation = &"down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(0, 7)
 shape = SubResource("CapsuleShape2D_urcc8")
 
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
