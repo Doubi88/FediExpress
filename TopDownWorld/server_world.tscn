@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://TargetCamera.gd" id="3_s6wta"]
 [ext_resource type="PackedScene" uid="uid://1bxnxjuqhb07" path="res://TopDownWorld/top_down_player.tscn" id="4_oxbcu"]
 [ext_resource type="Texture2D" uid="uid://caxci8gjhqq5h" path="res://TopDownWorld/background.png" id="5_yeabc"]
-[ext_resource type="PackedScene" uid="uid://crdwctj7m6f4i" path="res://UI/points_ui.tscn" id="6_bcdr0"]
+[ext_resource type="PackedScene" uid="uid://crdwctj7m6f4i" path="res://UI/in_game_points/points_ui.tscn" id="6_bcdr0"]
 
 [node name="ServerWorld" type="Node2D"]
 texture_filter = 1

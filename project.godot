@@ -12,20 +12,20 @@ config_version=5
 
 config/name="FediExpress"
 config/version="0.1"
-run/main_scene="res://splash.tscn"
+run/main_scene="res://UI/splash_screen/splash.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://Logo_single.png"
 
 [autoload]
 
-Dialogue="*res://UI/dialogue.tscn"
-GridData="*res://grid_data.gd"
+Dialogue="*res://UI/dialogue/dialogue.tscn"
+GridData="*res://globals/grid_data.gd"
 MusicPlayer="*res://Audio/music_player.tscn"
-GlobalServerData="*res://global_server_data.gd"
-MainMenu="*res://main_menu.tscn"
-AudioSignals="*res://UI/audio_signals.gd"
-GameOverScreen="*res://UI/game_over_screen.tscn"
-SceneSwitcher="*res://scene_switcher.gd"
+GlobalServerData="*res://globals/global_server_data.gd"
+MainMenu="*res://UI/pause_menu/pause_menu.tscn"
+AudioSignals="*res://UI/audio_control/audio_signals.gd"
+GameOverScreen="*res://UI/game_over/game_over_screen.tscn"
+SceneSwitcher="*res://globals/scene_switcher.gd"
 
 [display]
 

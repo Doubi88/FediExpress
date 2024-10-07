@@ -2,7 +2,7 @@ extends StaticBody2D
 
 class_name FediAccountHouse
 
-@onready var mission_window_packed = preload("res://UI/MissionsWindow.tscn")
+@onready var mission_window_packed = preload("res://UI/missions_window/MissionsWindow.tscn")
 @onready var attention_icon = $Attention
 @onready var name_label = $NameLabel
 @onready var audio_player: AudioStreamPlayer2D = $AudioStreamPlayer2D

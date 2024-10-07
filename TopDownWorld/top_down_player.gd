@@ -4,7 +4,7 @@ class_name TopDownPlayer
 
 @export var speed = 100
 
-@onready var mission_window_packed = preload("res://UI/MissionsWindow.tscn")
+@onready var mission_window_packed = preload("res://UI/missions_window/MissionsWindow.tscn")
 @onready var animation: AnimatedSprite2D = $AnimatedSprite
 
 var looking_at_house: FediAccountHouse

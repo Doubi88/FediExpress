@@ -17,7 +17,7 @@ enum Direction {
 
 @onready var tilemap: TileMapLayer = $TileMapLayer
 @onready var player = $TopDownPlayer
-@onready var area64Scene = preload("res://TopDownWorld/area_64x_64.tscn")
+@onready var area64Scene = preload("res://TopDownWorld/area_64x64.tscn")
 @onready var house_scene = preload("res://TopDownWorld/fedi_account_house.tscn")
 
 @export var server_data: FediServerData
