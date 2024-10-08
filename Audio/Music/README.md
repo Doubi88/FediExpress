@@ -6,4 +6,4 @@ Due to licensing concerns I removed the music from this folder. You can download
 * [Leva - Eternity](https://pixabay.com/music/acoustic-group-leva-eternity-149473/) by [Vitaliy Levkin](https://pixabay.com/users/lemonmusicstudio-14942887/) from [Pixabay](https://pixabay.com/music/)
 * [Summer Walk](https://pixabay.com/music/acoustic-group-summer-walk-152722/) by [Olexy](https://pixabay.com/users/olexy-25300778/) from [Pixabay](https://pixabay.com/music/)
 
-If you want to add your own music, add the corresponding file path to /Audio/music_player.gd.
+Place them in this folder and add the corresponding file paths to /Audio/music_player.gd.
