@@ -32,6 +32,10 @@ SceneSwitcher="*res://globals/scene_switcher.gd"
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
 [gui]
 
 theme/custom="res://theme.tres"
